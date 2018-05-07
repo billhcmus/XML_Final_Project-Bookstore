@@ -9,7 +9,7 @@ h1, h2, h3 {margin-top: 0;}
 ul, ol {margin: 0;}
 p {margin: 0;}
 html, body{
-   font-family: 'Raleway', sans-serif;
+   font-family:'Segoe UI', sans-serif;
    font-size: 100%;
    background:#f8f8f8; 
 }
@@ -691,6 +691,12 @@ ul.brand_icons li{
 ul.brand_icons li.last{
 	margin:0;
 }
+
+.brand_icons img {
+	width: 134.5px;
+	height: 100px
+}
+
 .instagram_top{
 	padding:3em 0;
 	background:#eaeaea;
