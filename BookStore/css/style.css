@@ -225,7 +225,7 @@ ul.quick_access li.check{
 	color:#333;
 	font-size:1.5em;
 	text-transform:uppercase;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 .welcome_box p{
 	color: #333;
@@ -243,7 +243,7 @@ ul.quick_access li.check{
 	color: #fff;
     font-size: 3.5em;
     font-weight: bold;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Lemonada', cursive;
     text-transform: uppercase;
     line-height: 1.2em;
 }
@@ -267,7 +267,7 @@ ul.quick_access li.check{
     -moz-transition: 0.2s;
     -o-transition: 0.2s;
     margin-top: 4em;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Lemonada', cursive;
 }
 .banner_btn:hover{
 	background:#7901FB;
@@ -454,7 +454,7 @@ ul.quick_access li.check{
 }
 /*--content--*/
 .menu_box{
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 .content_box {
 	padding:0em 0px 2em;
@@ -466,7 +466,7 @@ h3.menu_head{
 	text-transform: uppercase;
 	font-size: 0.85em;
 	margin: 0;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 ul.nav{
 	padding:14px 0;
@@ -482,7 +482,7 @@ ul.nav li a{
 	font-size:0.85em;
 	text-transform:uppercase;
 	font-weight:400;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 	display: block;
 	 padding:10px 15px 10px 40px;
 }
@@ -506,7 +506,7 @@ ul.nav li a:hover{
   font-weight: 400;
   color: #fff;
   margin: 0;
-  font-family: 'Audiowide', cursive;
+  font-family: 'Lemonada', cursive;
   line-height: 45px;
 }
 .tags{
@@ -520,7 +520,7 @@ h4.tag_head{
 	font-weight:400;
 	font-size: 1.3em;
 	margin-bottom: 1em;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 ul.tags_links{
 	padding:0;
@@ -620,7 +620,7 @@ ul.article_links li a{
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 .sale-box1 span.on_sale1{
 	background:#7901FB;
@@ -660,7 +660,7 @@ span.reducedfrom {
 	color:#777;
 }
 h3.m_1{
-  font-family: 'Audiowide', cursive;
+  font-family: 'Lemonada', cursive;
   color: #000;
   font-size: 1.5em;
   text-transform: uppercase;
@@ -668,7 +668,7 @@ h3.m_1{
   margin-top: 2em;
 }
 h3.m_2 {
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 	color: #000;
 	font-size: 1.5em;
 	text-transform: uppercase;
@@ -726,7 +726,7 @@ i.insta_icon{
 .instagram h3 {
 	color: #333;
 	font-size:1.5em;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 	font-weight:400;
 	margin: 0 0 1em 0;
 }
@@ -791,7 +791,7 @@ i.pin{
 	font-size: 1.2em;
 	font-weight:400;
 	margin-bottom: 1.5em;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 ul.list1 {
 	padding: 0;
@@ -974,7 +974,7 @@ ul.women_pagenation li a:hover{
 }
 .category{
 	margin-top:2em;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 ul.category_nav{
 	padding:0;
@@ -1024,7 +1024,7 @@ ul.category_nav li a:hover {
 	text-transform:uppercase;
 	font-size:1.7em;
 	font-weight:400;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 ul.rating{
 	padding:0;
@@ -1145,7 +1145,7 @@ h3.like, h3.recent{
 	color: #000;
 	font-size: 1.5em;
 	text-transform: uppercase;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 	font-style: italic;
 	font-weight:400;
 	margin-bottom: 1em;
@@ -1386,7 +1386,7 @@ p.comment-form-author {
 	-webkit-transition: 0.2s;
 	-moz-transition: 0.2s;
 	-o-transition: 0.2s;
-	font-family: 'Audiowide', cursive;
+	font-family: 'Lemonada', cursive;
 }
 .contact-form input[type="submit"]:hover{
 	background:#df4782;	

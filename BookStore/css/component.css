@@ -77,7 +77,7 @@ background: url(../images/grid_view.png)no-repeat;
 	display: inline-block;
 	transition: background 0.2s;
 	font-size: 0.8125em;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Roboto",Arial,Helvetica,sans-serif;
 }
 .cbp-vm-add:hover {
 	color: #fff;
