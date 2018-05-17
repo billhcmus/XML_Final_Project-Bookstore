@@ -5,6 +5,7 @@ const query = require('querystring');
 const port = 1000;
 
 let session = [];
+let data;
 
 function checkAuth(headers) {
     let uid = headers.uid;
@@ -17,14 +18,18 @@ function checkAuth(headers) {
 }
 
 app.createServer((req, res) => {
-    console.log(`${req.method} ${res.url}`);
+    console.log(`${req.method} ${req.url}`);
+    let getMethod = require('./services/getMethod.js');
 
     switch(req.method) {
         case 'GET':
-            let getMethod = require('./services/getMethod.js');
-
+            debugger;
             switch(req.url) {
-                
+                case '/DanhSachTruyen':
+                    res.writeHeader(200, {'Content-Type': 'text/xml'});
+                    data = getMethod.getListBooks();
+                    res.end(data);
+                    break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
                     res.end("Request was not support!!!");
@@ -34,8 +39,6 @@ app.createServer((req, res) => {
             break;
 
         case 'POST':
-            let getMethod = require('./services/getMethod.js');
-
             switch(req.url) {
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'})
@@ -48,7 +51,7 @@ app.createServer((req, res) => {
         case 'DELETE':
             break;
     }
-}).listen(err => {
+}).listen(port, err => {
     if (err != null) {
         console.log('==>Error: ' + err);
     }

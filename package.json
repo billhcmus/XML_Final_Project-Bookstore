@@ -1,0 +1,25 @@
+{
+  "name": "xml_final_project-bookstore-",
+  "version": "1.0.0",
+  "description": "BookShop",
+  "main": "index.js",
+  "dependencies": {
+    "xml2js": "^0.4.19",
+    "node": "^10.0.0",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billhcmus/XML_Final_Project-Bookstore-.git"
+  },
+  "author": "Huynh Trong Thoai - Phan Trong Thuyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billhcmus/XML_Final_Project-Bookstore-/issues"
+  },
+  "homepage": "https://github.com/billhcmus/XML_Final_Project-Bookstore-#readme"
+}

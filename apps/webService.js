@@ -5,7 +5,6 @@ const port = 1002
 
 app.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
-
     let req_url = (req.url == '/') ? '/index.html' : req.url
 
     let file_extension = req.url.lastIndexOf('.');
