@@ -4,9 +4,10 @@ const query = require('querystring');
 
 const port = 1000;
 
-let session = [];
 let getMethod = require('./services/getMethod.js');
 let data = getMethod.getListBooks();
+
+let session = [];
 
 function checkAuth(headers) {
     let uid = headers.uid;
