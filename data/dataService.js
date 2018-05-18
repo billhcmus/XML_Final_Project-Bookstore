@@ -5,7 +5,8 @@ const query = require('querystring');
 const port = 1000;
 
 let session = [];
-let data;
+let getMethod = require('./services/getMethod.js');
+let data = getMethod.getListBooks();
 
 function checkAuth(headers) {
     let uid = headers.uid;
@@ -19,15 +20,12 @@ function checkAuth(headers) {
 
 app.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
-    let getMethod = require('./services/getMethod.js');
 
     switch(req.method) {
         case 'GET':
-            debugger;
             switch(req.url) {
-                case '/DanhSachTruyen':
+                case '/':
                     res.writeHeader(200, {'Content-Type': 'text/xml'});
-                    data = getMethod.getListBooks();
                     res.end(data);
                     break;
                 default:

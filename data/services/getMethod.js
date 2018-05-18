@@ -10,11 +10,10 @@ let getListBooks = () => {
     let data = fs.readFileSync(path, 'utf-8');
     var parser = new xml2js.Parser()
     parser.parseString(data, function (err, result) {
-        listBooks.push({'Danh_sach_Sach' : result.Danh_sach_Sach})
+        let builder = new xml2js.Builder();
+        let xml = builder.buildObject(result.Danh_sach_Sach);
+        return xml;
     })
-    let builder = new xml2js.Builder();
-    let xml = builder.buildObject(listBooks);
-    return xml;
 }
 
 module.exports = {
