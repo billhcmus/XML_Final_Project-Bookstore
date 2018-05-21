@@ -101,6 +101,12 @@ background: url(../images/grid_view.png)no-repeat;
 .cbp-vm-add:before {
 	content: " ";
 }
+
+.cbp-vm-add:focus {
+	color: #fff;
+	background-color: rgb(69, 202, 17);
+	text-decoration: none;
+}
 /* Individual view mode styles */
 /* Large grid view */
 .cbp-vm-view-grid ul li {
