@@ -11,9 +11,23 @@ const port = 1001;
 
 app.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
+    readListBooks().payload
+    .then(data=>{
+         for (var i = 0; i < data.length; i++) {
+             var Maso = data[i][0].Maso;
+             var Ten = data[i][1].Ten;
+             listBooks.set({Maso}, {Ten});
+        }
+        check();
+    });
+
     switch(req.method) {
         case 'GET':
             switch(req.url) {
+                case '/LaySach':
+                    res.writeHeader(200, {'Content-Type': 'text/xml'});
+                    res.end(JSON.stringify([...listBooks]));
+                    break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
                     res.end("Request was not support!!!");
@@ -29,16 +43,6 @@ app.createServer((req, res) => {
                     break
             }
     }
-
-    readListBooks().payload
-    .then(data=>{
-         for (var i = 0; i < data.length; i++) {
-             var Maso = data[i][0].Maso;
-             var Ten = data[i][1].Ten;
-             listBooks.set({Maso}, {Ten});
-        }
-        check();
-    });
 
 }).listen(port, err => {
     if (err != null) {
