@@ -3,6 +3,7 @@ const url = require('url');
 const query = require('querystring');
 const port = 1000;
 
+let getMethod = require('./services/getMethod.js');
 
 let session = [];
 
@@ -23,10 +24,10 @@ app.createServer((req, res) => {
         case 'GET':
             let getMethod = require('./services/getMethod.js');
             switch(req.url) {
-                case '/':
+                case '/LaySach':
                     res.writeHeader(200, {'Content-Type': 'text/xml'});
-                    let data = getMethod.getListBooks();
-                    res.end(data);
+                    var data = getMethod.getListBooks();
+                    res.end(JSON.stringify([...data]));
                     break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
