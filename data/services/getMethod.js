@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const DOMParser = require('xmldom').DOMParser;
 const path = __dirname + '/../Du_lieu.xml';
 
 //Lấy danh sách truyện

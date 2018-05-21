@@ -1,11 +1,8 @@
 const app = require('http');
 const url = require('url');
 const query = require('querystring');
-
 const port = 1000;
 
-let getMethod = require('./services/getMethod.js');
-let data = getMethod.getListBooks();
 
 let session = [];
 
@@ -24,9 +21,11 @@ app.createServer((req, res) => {
 
     switch(req.method) {
         case 'GET':
+            let getMethod = require('./services/getMethod.js');
             switch(req.url) {
                 case '/':
                     res.writeHeader(200, {'Content-Type': 'text/xml'});
+                    let data = getMethod.getListBooks();
                     res.end(data);
                     break;
                 default:

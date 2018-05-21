@@ -5,12 +5,28 @@ const xml2js = require('xml2js');
 
 const axios = require('axios');
 
-let listBooks;
 const port = 1001;
 
 app.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
-    readListBooks();
+    switch(req.method) {
+        case 'GET':
+            switch(req.url) {
+                default:
+                    res.writeHeader(404, {'Content-Type': 'text/plain'});
+                    res.end("Request was not support!!!");
+                    break;
+            }
+            console.log('-->Done');
+            break;
+        case 'POST':
+            switch(req.url) {
+                default:
+                    res.writeHeader(404, {'Content-Type': 'text/plain'})
+                    res.end("Request was not support!!!")
+                    break
+            }
+    }
 }).listen(port, err => {
     if (err != null) {
         console.log('==> Error: ', err);
@@ -19,17 +35,5 @@ app.createServer((req, res) => {
         console.log('Server is starting at port ' + port);
     }
 });
- 
-function readListBooks() {
-    axios.get('http://localhost:1000/')
-        .then(function(response) {
-            var parser = new xml2js.Parser()
-            parser.parseString(response.data, function (err, result) {
-                listBooks = result.Danh_sach_Sach.Sach;
-            });
-            return listBooks;
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-}
+   
+let listBooks; 
