@@ -2451,4 +2451,21 @@ h3.like, h3.recent {
 .nbs-flexisel-nav-left, .nbs-flexisel-nav-right {
   margin-top: 5em;
 }
+
+}
+
+
+.content_grid img{
+	width: 270px;
+	height: 324px;
+}
+
+#flexiselDemo3 img  {
+	width: 260px;
+	height: 350px;
+}
+
+.banner_img img{
+	width: 262px;
+	height: 317px;
 }
