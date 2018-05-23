@@ -9,18 +9,18 @@ var listBooks = new Map();
 
 const port = 1001;
 
+readListBooks().payload
+.then(data=>{
+     for (var i = 0; i < data.length; i++) {
+         var Maso = data[i][0].Maso;
+         var Ten = data[i][1].Ten;
+         listBooks.set({Maso}, {Ten});
+    }
+});
+
 app.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
-    readListBooks().payload
-    .then(data=>{
-         for (var i = 0; i < data.length; i++) {
-             var Maso = data[i][0].Maso;
-             var Ten = data[i][1].Ten;
-             listBooks.set({Maso}, {Ten});
-        }
-        check();
-    });
-
+   
     switch(req.method) {
         case 'GET':
             switch(req.url) {
@@ -40,7 +40,7 @@ app.createServer((req, res) => {
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'})
                     res.end("Request was not support!!!")
-                    break
+                    break;
             }
     }
 

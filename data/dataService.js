@@ -7,6 +7,8 @@ let getMethod = require('./services/getMethod.js');
 
 let session = [];
 
+var data = getMethod.getListBooks();
+
 function checkAuth(headers) {
     let uid = headers.uid;
     for (let i = 0;i < session.length;i++) {
@@ -26,7 +28,6 @@ app.createServer((req, res) => {
             switch(req.url) {
                 case '/LaySach':
                     res.writeHeader(200, {'Content-Type': 'text/xml'});
-                    var data = getMethod.getListBooks();
                     res.end(JSON.stringify([...data]));
                     break;
                 default:

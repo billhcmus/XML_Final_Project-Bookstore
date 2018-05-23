@@ -48,7 +48,7 @@ app.createServer((req, res) => {
              var Ten = data[i][1].Ten;
              listBooks.set({Maso}, {Ten});
         }
-        console.log(data);
+        console.log(listBooks);
     });
 
 }).listen(port, (err) => {
