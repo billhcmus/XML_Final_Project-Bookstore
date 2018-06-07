@@ -1,17 +1,24 @@
-const app = require('http')
-const fs = require('fs')
-const axios = require('axios')
+var app = require('http');
+var fs= require('fs');
+var query = require('querystring');
+var url = require('url');
 
-const port = 1002
+var port = 1002;
 
-var listBooks = new Map();
+app.createServer((req,res) => {
+	switch(req.method) {
+		case 'POST':
+		break;
+		case 'GET':
+		{
+			var path = req.url.split('?')[0];
 
-app.createServer((req, res) => {
-    console.log(`${req.method} ${req.url}`);
-    let req_url = (req.url == '/') ? '/index.html' : req.url
+			var req_url = (path == '/') ? '/index.html' : path;
 
-    let file_extension = req.url.lastIndexOf('.');
-    let header_type = (file_extension == -1 && req.url != '/')
+    		var file_extension = req_url.lastIndexOf('.');
+    		var duoiFile = req_url.substr(file_extension);
+
+   			var header_type = (file_extension == -1 && req.url != '/')
                     ? 'text/plain'
                     : {
                         '/' : 'text/html',
@@ -21,55 +28,41 @@ app.createServer((req, res) => {
                         '.png' : 'image/png',
                         '.gif' : 'image/gif',
                         '.css' : 'text/css',
-                        '.js' : 'text/javascript'
-                        }[ req.url.substr(file_extension) ];
+                        '.js' : 'text/javascript',
+                        '.map' : 'text/plain'
+                        }[duoiFile];
 
-    // Đọc file theo req gửi từ Client lên (lưu ý, phần này sẽ được call nhiều lần để đọc các file Resource)
-    fs.readFile( __dirname + req_url, (err, data)=>{
-        if (err) {
-            console.log('==> Error: ' + err)
-            console.log('==> Error 404: file not found ' + res.url)
-        
-            res.writeHead(404, 'Not found')
-            res.end();
-        } else {
-            // Set Header cho res (phần header_type đã được xử lý tính toán ở dòng code thứ 16 và 17)
-            res.setHeader('Content-type' , header_type);
-
-            res.end(data);
-            console.log( req.url, header_type );
-        }
-    })
-
-    readListBooks().payload
-    .then(data=>{
-         for (var i = 0; i < data.length; i++) {
-             var Maso = data[i][0].Maso;
-             var Ten = data[i][1].Ten;
-             listBooks.set({Maso}, {Ten});
-        }
-        console.log(listBooks);
-    });
+		    // Đọc file theo req gửi từ Client lên
+		    fs.readFile( __dirname + req_url, (err, data)=>{
+		        if (err) {
+		            // Xử lý phần tìm không thấy resource ở Server
+		            console.log('==> Error: ' + err)
+		            console.log('==> Error 404: file not found ' + res.url)
+		            
+		            // Set Header của res thành 404 - Not found (thông báo lỗi hiển thị cho Client)
+		            res.writeHead(404, 'Not found')
+		            res.end()
+		        } else {
+		            // Set Header cho res
+		            res.setHeader('Content-type' , header_type);
+		            res.end(data);
+		        }
+		    })
+		}
+		break;
+		default:
+		{
+			res.writeHeader(404,{'Content-Type':'text/plain'});
+			res.end("Request was not support!!!");
+		}
+		break;
+	}
 
 }).listen(port, (err) => {
-    if(err != null)
-        console.log('==> Error: ' + err)
-    else
-        console.log('Server is starting at port ' + port)
-})
-
-function readListBooks() {
-
-    const request = axios.get('http://localhost:1001/LaySach')
-    .then(function(response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-      return Promise.reject(error);
-    });
-
-  return {
-      payload: request
-  };
-}
+	if(err) {
+		console.log("ERROR: " + err);
+	}
+	else {
+		console.log("Server is starting at port: " + port);
+	}
+});

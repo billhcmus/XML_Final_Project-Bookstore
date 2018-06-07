@@ -7,8 +7,6 @@ let getMethod = require('./services/getMethod.js');
 
 let session = [];
 
-var data = getMethod.getListBooks();
-
 function checkAuth(headers) {
     let uid = headers.uid;
     for (let i = 0;i < session.length;i++) {
@@ -20,14 +18,14 @@ function checkAuth(headers) {
 }
 
 app.createServer((req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(`${req.method} ${req.url}`);
 
     switch(req.method) {
         case 'GET':
-            let getMethod = require('./services/getMethod.js');
             switch(req.url) {
                 case '/LaySach':
-                    res.writeHeader(200, {'Content-Type': 'text/xml'});
+                    let data = getMethod.getListBooks();
                     res.end(JSON.stringify([...data]));
                     break;
                 default:
