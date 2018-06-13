@@ -8,7 +8,8 @@ function getData() {
 }
 
 function setListBooksForNewProduct(listBooks) {
-
+    if ($('#newBooks').length == 0)
+        return;
     let length = listBooks.length;
     let html = '';
     for (i = 0; i < 9; i++) {
@@ -37,11 +38,13 @@ function setListBooksForNewProduct(listBooks) {
         if (i === 2 || i === 5 || i === 8)
             html += `</div>`;
     }
-    if ($('#newBooks').length)
-        $('#newBooks').html(html);
+    
+    $('#newBooks').html(html);
 }
 
 function setListBooksForBuy(listBooks) {
+    if ($("#buyMuchBooks").length == 0)
+        return;
     let length = listBooks.length;
     let count = 0;
     let html = '<ul id="flexiselDemo3">';
@@ -61,8 +64,7 @@ function setListBooksForBuy(listBooks) {
             break;
     }
     html += '</ul>';
-    if ($("#buyMuchBooks").length)
-        $("#buyMuchBooks").html(html);
+    $("#buyMuchBooks").html(html);
 }
 
 function setListBooksForShop(listBooks, numberBooksOfAPage) {
@@ -76,7 +78,7 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
                         <div class="inner_content clearfix">
                             <div class="product_image">
                                 <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" />
-                                <div class="product_container">
+                                <div class="product_container_shop">
                                     <div class="cart-left">
                                         <p class="title">${listBooks[i][1].name}</p>
                                     </div>

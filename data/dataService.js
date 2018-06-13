@@ -32,6 +32,13 @@ app.createServer((req, res) => {
                         res.end(JSON.stringify([...data]));
                     }
                     break;
+                case '/LaySachChoAdmin': {
+                    if (cache) {
+                        let data = getMethod.getListBooksForAdmin(cache);
+                        res.end(JSON.stringify([...data]));
+                    }
+                    break;
+                }
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
                     res.end("Request was not support!!!");
