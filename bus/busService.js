@@ -3,6 +3,7 @@ const url = require('url');
 
 const port = 1001;
 
+let cache = undefined;
 
 app.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,6 +28,10 @@ app.createServer((req, res) => {
 							res.end("Error 404");
                         })
 
+                        if (cache) {
+                            res.end(cache);
+                            return;
+                        }
                         response.on('data', (chunk) => {
                             body += chunk;
                         }).on('end', () => {
