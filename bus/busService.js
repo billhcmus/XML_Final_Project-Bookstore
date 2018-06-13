@@ -3,7 +3,7 @@ const url = require('url');
 
 const port = 1001;
 
-let cache = undefined;
+let count = 0;
 
 app.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,18 +27,16 @@ app.createServer((req, res) => {
 							res.writeHeader(404,{'Content-Type':'text/plain'});
 							res.end("Error 404");
                         })
-
-                        if (cache) {
-                            res.end(cache);
-                            return;
-                        }
+                       
                         response.on('data', (chunk) => {
                             body += chunk;
                         }).on('end', () => {
                             res.writeHeader(200,{'Content-Type':'text/xml'})
-							res.end(body);
-							return;
+                            res.end(body);
+                            return;
                         })
+                        
+                        
                     })
 
                     httpRes.on('error', function() {

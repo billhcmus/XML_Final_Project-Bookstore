@@ -149,9 +149,10 @@ div.item_price {
   color: #000;
   font-size: 1em;
   font-weight:bold;
-	bottom: 3%;
+	bottom: 6%;
 	right: 2%;
 }
+
 ul.cart{
 	padding:0;
 	list-style:none;
@@ -660,6 +661,16 @@ p.title a:hover{
 .product_container {
 	padding:1em 0;
 }
+
+.product_container item_price {
+	position: absolute;
+  color: #000;
+  font-size: 1em;
+  font-weight:bold;
+	bottom: 3%;
+	right: 2%;
+}
+
 .price{
 	float: right;
 	font-weight: bold;

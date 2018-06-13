@@ -13,10 +13,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Shape Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<link href="./css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="./js/simpleCart.min.js"></script>
 	<script src="../js/jquery.min.js"></script>
 	<!-- Custom Theme files -->
 	<link href="./css/style.css" rel='stylesheet' type='text/css' />
@@ -27,8 +25,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
 	<script src="./js/jquery.easydropdown.js"></script>
 	<!-- Add fancyBox main JS and CSS files -->
-	<script src="./js/jquery.magnific-popup.js" type="text/javascript"></script>
 	<link href="./css/magnific-popup.css" rel="stylesheet" type="text/css">
+	<script src="./js/guest.js" async></script>
 	<script>
 		$(document).ready(function () {
 			$('.popup-with-zoom-anim').magnificPopup({
@@ -425,13 +423,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </body>
-<script src="./js/guest.js"></script>
-
-<script>
-
-</script>
-
-<script>
+<script async>
 	let data = getData();
 	let numberBooks = 9;
 	setListBooksForShop(data, numberBooks);
@@ -439,5 +431,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		numberBooks = document.getElementById("numberBooksDisplay").value;
 		setListBooksForShop(data, numberBooks);
 	}
-	</script>
+</script>
+<script src="./js/simpleCart.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="./js/jquery.magnific-popup.js" type="text/javascript"></script>
+
 </html>

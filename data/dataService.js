@@ -5,6 +5,8 @@ const port = 1000;
 
 let getMethod = require('./services/getMethod.js');
 
+let cache = getMethod.readData();
+
 let session = [];
 
 function checkAuth(headers) {
@@ -25,8 +27,10 @@ app.createServer((req, res) => {
         case 'GET':
             switch(req.url) {
                 case '/LaySach':
-                    let data = getMethod.getListBooks();
-                    res.end(JSON.stringify([...data]));
+                    if (cache) {
+                        let data = getMethod.getListBooks(cache);
+                        res.end(JSON.stringify([...data]));
+                    }
                     break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
