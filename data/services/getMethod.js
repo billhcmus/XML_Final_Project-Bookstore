@@ -3,19 +3,19 @@ const DOMParser = require('xmldom').DOMParser;
 const path = __dirname + '/../Du_lieu.xml';
 
 function readData() {
-    var xml = fs.readFileSync(path, "utf-8");
-    var xmlDOM = new DOMParser().parseFromString(xml, "text/xml").documentElement;
+    let xml = fs.readFileSync(path, "utf-8");
+    let xmlDOM = new DOMParser().parseFromString(xml, "text/xml").documentElement;
     return xmlDOM;
 }
 
 //Lấy danh sách truyện
 let getListBooks = (xmlDOM) => {
-    var map = new Map();
-    var name, code, exportPrice, importPrice, revenue, inventory, status;
+    let map = new Map();
+    let name, code, exportPrice, importPrice, revenue, inventory, status;
 
-    var listBooks = xmlDOM.getElementsByTagName("Sach");
+    let listBooks = xmlDOM.getElementsByTagName("Sach");
 
-    for (var i = 0; i < listBooks.length; i++) {
+    for (let i = 0; i < listBooks.length; i++) {
         code = listBooks[i].getAttribute("Ma_so");
         name = listBooks[i].getAttribute("Ten")
         exportPrice = listBooks[i].getAttribute("Don_gia_Ban");
@@ -31,6 +31,12 @@ let getListBooks = (xmlDOM) => {
     }
     return map;
 }
+
+let getListBooksForAdmin = (xmlDOM) => {
+    let map = new Map();
+    let code, name, exportPrice, inventory;
+}
+
 
 module.exports = {
     readData: readData,

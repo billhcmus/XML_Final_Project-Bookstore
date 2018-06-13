@@ -2,8 +2,8 @@ const app = require('http');
 const url = require('url');
 
 const port = 1001;
+let cache = undefined;
 
-let count = 0;
 
 app.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -13,6 +13,7 @@ app.createServer((req, res) => {
         case 'GET':
             switch(req.url) {
                 case '/LaySach': {
+                    debugger;
                     let options = {
 						hostname: 'localhost',
 						port : 1000,
@@ -28,21 +29,31 @@ app.createServer((req, res) => {
 							res.end("Error 404");
                         })
                        
-                        response.on('data', (chunk) => {
-                            body += chunk;
-                        }).on('end', () => {
-                            res.writeHeader(200,{'Content-Type':'text/xml'})
-                            res.end(body);
-                            return;
-                        })
-                        
-                        
+                        if (!cache) {
+                            response.on('data', (chunk) => {
+                                body += chunk;
+                            }).on('end', () => {
+                                cache = body;
+                                res.writeHeader(200,{'Content-Type':'text/xml'})
+                                res.end(body);
+                                return;
+                            })
+                            console.log("Tao cache");
+                        }
+                        else {
+                            res.end(cache);
+                            console.log("Khong tao cache");
+                        }
                     })
 
                     httpRes.on('error', function() {
                         res.writeHeader(404,{'Content-Type':'text/plain'});
                         res.end("Can not get data");
                     });
+                }
+                case 'LayThongTinAdmin': {
+                    
+                    break;
                 }
                 break;
                 default:
