@@ -158,7 +158,7 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#">
+                        <a href="#listBooksForAdmin" data-toggle="tab" class='button_seeProduct'>
                             <div class="circle-tile-heading dark-blue">
                                 <i class="fa fa-users fa-fw fa-3x"></i>
                             </div>
@@ -167,10 +167,10 @@
                             <div class="circle-tile-description text-faded">
                                 Xem Mặt Hàng
                                 <div class="circle-tile-number text-faded">
-                                 
+                
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer">Xem thêm
+                            <a href="#listBooksForAdmin"  class="circle-tile-footer button_seeProduct" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#">
+                        <a href="#haha"  data-toggle="tab">
                             <div class="circle-tile-heading green">
                                 <i class="fa fa-money fa-fw fa-3x"></i>
                             </div>
@@ -190,15 +190,16 @@
                                  
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer">Xem thêm
+                            <a href="haha" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#">
+                        <a href="#2" data-toggle="tab">
                             <div class="circle-tile-heading orange">
                                 <i class="fa fa-bell fa-fw fa-3x"></i>
                             </div>
@@ -210,7 +211,7 @@
                                  
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer">Xem thêm
+                            <a href="#" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -218,7 +219,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#">
+                        <a href="#3" data-toggle="tab">
                             <div class="circle-tile-heading blue">
                                 <i class="fa fa-tasks fa-fw fa-3x"></i>
                             </div>
@@ -230,7 +231,7 @@
                                  
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer">Xem thêm
+                            <a href="#" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -238,39 +239,22 @@
                 </div>
             </div>
 
-            <!--
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="tile tile-img tile-time morning" style="height: 200px">
-                        <p class="time-widget">
-                            <span class="time-widget-heading">It Is Currently</span>
-                            <br>
-                            <strong>
-                                <span id="datetime">Friday
-                                    <br>March 17th, 2017
-                                    <br>12:43:17 PM</span>
-                            </strong>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-9"></div>
-
+            <div class="tab-content">
+                <div id="listBooksForAdmin" class="tab-pane fade in active"></div>
+                <div id="haha" class="tab-pane fade">Haha</div>
+                <div id="2" class="tab-pane fade">2</div>
+                <div id="3" class="tab-pane fade">3</div>
             </div>
-        -->
-
-        <div id="listBooksForAdmin">
-        </div>
-
-
-       <nav aria-label="Page navigation" style="text-align: center">
-            <ul class="pagination pagination-lg">
-                <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">1</a></li>
-                <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">2</a></li>
-                <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">3</a></li>
-                <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">4</a></li>
-                <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">5</a></li>
-            </ul>
-        </nav>
+            
+            <nav id='pagination_admin' aria-label="Page navigation" style="text-align: center">
+                <ul class="pagination pagination-lg">
+                    <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">1</a></li>
+                    <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">2</a></li>
+                    <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">3</a></li>
+                    <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">4</a></li>
+                    <li class="page-item" style="display: inline-block; cursor: pointer"><a class="page-link">5</a></li>
+                </ul>
+            </nav>
         <!-- page-wrapper END-->
     </div>
 </body>
@@ -278,6 +262,7 @@
 <script>
     let data = getData();
     setListBooksForAdmin(data,0, 12);
+    
     $('.page-item:eq(0)').click(function(){
             setListBooksForAdmin(data, 0, 12);
     });
@@ -293,10 +278,18 @@
     $('.page-item:eq(4)').click(function(){
         setListBooksForAdmin(data, 48, 50);
     });
+
+    //Process panigation
+    $('a:not(.button_seeProduct)').click(function() {
+        $('#pagination_admin').hide();
+    });
+    $('.button_seeProduct').click(function () {
+        $('#pagination_admin').show();
+    })
 </script>
 
 <!-- Bootstrap JS form CDN -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
