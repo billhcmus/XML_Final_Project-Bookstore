@@ -30,8 +30,16 @@ app.createServer((req,res) => {
                         '.css' : 'text/css',
                         '.js' : 'text/javascript',
                         '.map' : 'text/plain'
-                        }[duoiFile];
-
+						}[duoiFile];
+			
+			switch(req.url) {
+				case '/employee.html':
+				{
+					req_url = "/html"+req.url;
+					break;
+				}
+			}
+			
 		    // Đọc file theo req gửi từ Client lên
 		    fs.readFile( __dirname + req_url, (err, data)=>{
 		        if (err) {
@@ -47,7 +55,7 @@ app.createServer((req,res) => {
 		            res.setHeader('Content-type' , header_type);
 		            res.end(data);
 		        }
-		    })
+		    });
 		}
 		break;
 		default:
