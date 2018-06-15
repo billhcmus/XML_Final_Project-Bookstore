@@ -36,3 +36,84 @@ function setListBooksForAdmin(listBooks, start, end) {
     $("#listBooksForAdmin").html(html);
 }
 
+function changePrice(listBooks) {
+    if ($("#changePrice").length === 0)
+        return;
+    let length = listBooks.length;
+    let html = '';
+    
+    for (let i = 0;i < length;i++) {
+        html += `<tr>
+                    <td>
+                        <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                    </td>
+                    <td>${listBooks[i][0].code}</td>
+                    <td>${listBooks[i][1].name}</td>
+                    <td value="${listBooks[i][1].sellNumber}">${formatNumber(listBooks[i][1].sellNumber)} cuốn</td>
+                    <td value="${listBooks[i][1].exportPrice}">${listBooks[i][1].exportPrice}đ</td>
+                    <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
+                </tr>`     
+    }
+    $("#changePrice").html(html);
+}
+
+function formatNumber(number) {
+    var parts = number.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
+//Xử lý view
+var data = getData();
+setListBooksForAdmin(data, 0, 12);
+changePrice(data);
+
+$('.page-item:eq(0)').click(function(){
+        setListBooksForAdmin(data, 0, 12);
+});
+$('.page-item:eq(1)').click(function(){
+    setListBooksForAdmin(data, 12, 24);
+});
+$('.page-item:eq(2)').click(function(){
+    setListBooksForAdmin(data, 24, 36);
+});
+$('.page-item:eq(3)').click(function(){
+    setListBooksForAdmin(data, 36, 48);
+});
+$('.page-item:eq(4)').click(function(){
+    setListBooksForAdmin(data, 48, 50);
+});
+
+//Process panigation
+$('a:not(.button_seeProduct)').click(function() {
+    $('#pagination_admin').hide();
+});
+$('.button_seeProduct, .page-item').click(function () {
+    $('#pagination_admin').show();
+});
+
+$('#searchBook').click(function() {
+    let content = $('#txtSearchBook').val();
+    let length = data.length;
+    let html = '';
+    for (i = 0;i < length;i++) {
+        if (data[i][1].name.toUpperCase().includes(content.toUpperCase()) 
+        || data[i][1].code.toUpperCase().includes(content.toUpperCase())) {
+            html += `<tr>
+                        <td>
+                            <img src="images/${data[i][0].code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                        </td>
+                        <td>${data[i][0].code}</td>
+                        <td>${data[i][1].name}</td>
+                        <td value="${listBooks[i][1].sellNumber}">${formatNumber(listBooks[i][1].sellNumber)} cuốn</td>
+                        <td value="${listBooks[i][1].exportPrice}">${formatNumber(listBooks[i][1].exportPrice)}đ</td>
+                        <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
+                    </tr>`
+        }
+    }
+    $("#changePrice").html(html);
+});
+
+$('.updatePrice').click(function () {
+    //
+})

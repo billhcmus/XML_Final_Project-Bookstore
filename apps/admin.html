@@ -178,7 +178,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#haha"  data-toggle="tab">
+                        <a href="#changePriceBooks"  data-toggle="tab">
                             <div class="circle-tile-heading green">
                                 <i class="fa fa-money fa-fw fa-3x"></i>
                             </div>
@@ -190,7 +190,7 @@
                                  
                                 </div>
                             </div>
-                            <a href="haha" class="circle-tile-footer" data-toggle="tab">Xem thêm
+                            <a href="#changePriceBooks" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -199,7 +199,7 @@
 
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#2" data-toggle="tab">
+                        <a href="#insertBook" data-toggle="tab">
                             <div class="circle-tile-heading orange">
                                 <i class="fa fa-bell fa-fw fa-3x"></i>
                             </div>
@@ -211,7 +211,7 @@
                                  
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer" data-toggle="tab">Xem thêm
+                            <a href="#insertBook" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -219,7 +219,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#3" data-toggle="tab">
+                        <a href="#suspendBook" data-toggle="tab">
                             <div class="circle-tile-heading blue">
                                 <i class="fa fa-tasks fa-fw fa-3x"></i>
                             </div>
@@ -231,7 +231,7 @@
                                  
                                 </div>
                             </div>
-                            <a href="#" class="circle-tile-footer" data-toggle="tab">Xem thêm
+                            <a href="#suspendBook" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -241,9 +241,33 @@
 
             <div class="tab-content">
                 <div id="listBooksForAdmin" class="tab-pane fade in active"></div>
-                <div id="haha" class="tab-pane fade">Haha</div>
-                <div id="2" class="tab-pane fade">2</div>
-                <div id="3" class="tab-pane fade">3</div>
+                <div id="changePriceBooks" class="tab-pane fade">
+                    <div class="container">
+                        <h2>Thống kê sách</h2>
+                        <form action="" class="form-inline" role="form" style="margin-bottom: 2%; float: right">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtSearchBook" placeholder="Nhập nội dung tìm kiếm">
+                            </div>
+                            <button type="button" id="searchBook" class="btn btn-primary">Tìm kiếm</button>
+                        </form>
+                        
+                        <table class="table table-striped">
+                            <thead style="background-color: rgb(79, 129, 189); color: white">
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Mã số</th>
+                                    <th>Tên sách</th>
+                                    <th>Sách đã bán</th>
+                                    <th>Đơn giá hiện tại</th>
+                                </tr>
+                            </thead>
+                            <tbody id="changePrice">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="insertBook" class="tab-pane fade"><h2>Tính năng chưa hỗ trợ</h2></div>
+                <div id="suspendBook" class="tab-pane fade"><h2>Tính năng chưa hỗ trợ</h2></div>
             </div>
             
             <nav id='pagination_admin' aria-label="Page navigation" style="text-align: center">
@@ -258,36 +282,6 @@
         <!-- page-wrapper END-->
     </div>
 </body>
-
-<script>
-    let data = getData();
-    setListBooksForAdmin(data,0, 12);
-    
-    $('.page-item:eq(0)').click(function(){
-            setListBooksForAdmin(data, 0, 12);
-    });
-    $('.page-item:eq(1)').click(function(){
-        setListBooksForAdmin(data, 12, 24);
-    });
-    $('.page-item:eq(2)').click(function(){
-        setListBooksForAdmin(data, 24, 36);
-    });
-    $('.page-item:eq(3)').click(function(){
-        setListBooksForAdmin(data, 36, 48);
-    });
-    $('.page-item:eq(4)').click(function(){
-        setListBooksForAdmin(data, 48, 50);
-    });
-
-    //Process panigation
-    $('a:not(.button_seeProduct)').click(function() {
-        $('#pagination_admin').hide();
-    });
-    $('.button_seeProduct').click(function () {
-        $('#pagination_admin').show();
-    })
-</script>
-
 <!-- Bootstrap JS form CDN -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
