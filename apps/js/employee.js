@@ -11,29 +11,23 @@ function setListBooks(listBooks) {
     if ($('#listBooks').length == 0) {
         return;
     }
-    let html = '<ul>';
+    var html = '';
     for (i = 0; i < listBooks.length; i++) {
-        html += `<li class="simpleCart_shelfItem">
-                <a class="cbp-vm-image" href="./single.html">
-                    <div class="inner_content clearfix">
-                        <div class="product_image">
-                            <img src="../images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" />
-                            <div class="product_container">
-                                <div class="cart-left">
-                                    <p class="title">${listBooks[i][1].name}</p>
-                                </div>
-                                <div class="mount item_price price">${listBooks[i][1].exportPrice} đ</div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="cbp-vm-details">
-                    Silver beet shallot wakame tomatillo salsify mung bean beetroot groundnut.
-                </div>
-                <a class="button item_add cbp-vm-icon cbp-vm-add" href="#">Bán hàng</a>
-                </li>`;
+        var importPrice = parseInt(listBooks[i][1].exportPrice,10) + 10000;
+        html += `<div class="col-md-3 col-sm-6" style="height: 350px">
+        <div class="single-shop-product">
+            <div class="product-upper">
+                <img src="../images/${listBooks[i][0].code}.jpg" height="150" width="150" alt="">
+            </div>
+            <h6><a href="">${listBooks[i][1].name}</a></h6>
+            <div class="product-carousel-price">
+                <ins>${listBooks[i][1].exportPrice} VNĐ</ins> <del>${importPrice} VNĐ</del>
+            </div>  
+            <div class="product-option-shop">
+                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Bán</a>
+            </div>                       
+        </div>
+    </div>`;
     }
-    html += '</ul>';
     $('#listBooks').html(html);
 }
