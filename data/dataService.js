@@ -6,7 +6,7 @@ const port = 1000;
 let getMethod = require('./services/getMethod');
 let saveMethod = require('./services/saveMethod');
 
-let cache = getMethod.getListBooks();
+let cache = "";
 
 let session = [];
 
@@ -28,10 +28,11 @@ app.createServer((req, res) => {
         case 'GET':
             switch(req.url) {
                 case '/LaySach':
-                    if (cache) {
-                        res.writeHeader(200, {'Content-Type': 'text/xml'})
-                        res.end(cache);
+                    if (!cache) {
+                        cache = getMethod.getListBooks();
                     }
+                    res.writeHeader(200, {'Content-Type': 'text/xml'})
+                    res.end(cache);
                     break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
@@ -54,6 +55,7 @@ app.createServer((req, res) => {
                         if (check) {
                             res.writeHead(200, { 'Content-Type': 'text/plain'});
                             res.end('Cập nhật giá thành công.');
+                            cache = "";
                             console.log(' -->Done');
                         }
                         else {

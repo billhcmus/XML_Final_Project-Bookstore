@@ -2,8 +2,7 @@ const app = require('http');
 const url = require('url');
 
 const port = 1001;
-let cacheGuest = undefined;
-let cacheAdmin = undefined;
+let cache = "";
 
 
 app.createServer((req, res) => {
@@ -29,19 +28,19 @@ app.createServer((req, res) => {
                             res.end("Error 404");
                         })
 
-                        if (!cacheGuest) {
+                        if (!cache) {
                             response.on('data', (chunk) => {
                                 body += chunk;
                             }).on('end', () => {
-                                cacheGuest = body;
+                                cache = body;
                                 res.writeHeader(200, { 'Content-Type': 'text/xml' })
-                                res.end(body);
+                                res.end(cache);
                                 return;
                             })
                             //console.log("Tao cache");
                         }
                         else {
-                            res.end(cacheGuest);
+                            res.end(cache);
                             //console.log("Khong tao cache");
                         }
                     })
@@ -94,6 +93,7 @@ app.createServer((req, res) => {
                             }).on('end', () => {
                                 res.writeHeader(200, { 'Content-Type': 'text/plain' })
                                 res.end(body);
+                                cache = "";
                                 console.log('-->Done');
                             }) 
                         });
