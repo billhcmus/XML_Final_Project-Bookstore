@@ -27,6 +27,29 @@ let changePrice = (data) => {
 
 }
 
+let changeStatus = (data) => {
+    let code = data.code;
+    let status = data.status;
+
+    let filePath = pathSP + '/' + code + '.xml';
+
+    let xml = fs.readFileSync(filePath, 'utf-8');
+    let xmlDOM = new DOMParser().parseFromString(xml, 'text/xml').documentElement;
+    xmlDOM.setAttribute('Tam_ngung', status);
+
+    let xmlNew = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(xmlDOM);
+    
+    try {
+        fs.writeFileSync(filePath, xmlNew, 'utf-8');
+        return true;
+    }
+    catch (error) {
+        return dalse;
+    }
+
+}
+
 module.exports = {
-    changePrice: changePrice
+    changePrice: changePrice,
+    changeStatus: changeStatus
 }

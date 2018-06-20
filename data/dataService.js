@@ -44,7 +44,7 @@ app.createServer((req, res) => {
 
         case 'POST':
             switch(req.url) {
-                case '/CapNhat': {
+                case '/CapNhatGiaBan': {
                     var body = '';
                     req.on('data', function(chunk) {
                         body += chunk;
@@ -52,6 +52,28 @@ app.createServer((req, res) => {
                     req.on('end', function () {
                         var data = JSON.parse(body);
                         var check = saveMethod.changePrice(data);
+                        if (check) {
+                            res.writeHead(200, { 'Content-Type': 'text/plain'});
+                            res.end('Cập nhật giá thành công.');
+                            cache = "";
+                            console.log(' -->Done');
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain'});
+                            res.end('Cập nhật thất bại');
+                            console.log(' -->Fail');
+                        }
+                    })
+                }
+                break;
+                case '/CapNhatTinhTrang': {
+                    var body = '';
+                    req.on('data', function(chunk) {
+                        body += chunk;
+                    })
+                    req.on('end', function () {
+                        var data = JSON.parse(body);
+                        var check = saveMethod.changeStatus(data);
                         if (check) {
                             res.writeHead(200, { 'Content-Type': 'text/plain'});
                             res.end('Cập nhật giá thành công.');
