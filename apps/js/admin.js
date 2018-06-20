@@ -59,7 +59,7 @@ function changePrice(listBooks) {
                     </td>
                     <td>${code}</td>
                     <td>${name}</td>
-                    <td value="${exportPrice}">${formatNumber(exportPrice)}đ</td>
+                    <td>${formatNumber(exportPrice)}đ</td>
                     <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
                 </tr>`     
     }
@@ -120,8 +120,8 @@ $('#searchBook').click(function() {
                         </td>
                         <td>${code}</td>
                         <td>${name}</td>
-                        <td value="${exportPrice}">${formatNumber(exportPrice)}đ</td>
-                        <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
+                        <td>${formatNumber(exportPrice)}đ</td>
+                        <td><button type="button" class="btn btn-success updatePrice" data-toggle="modal" data-target="#myModal">Sửa</button></td>
                     </tr>`
         }
     }
@@ -129,5 +129,11 @@ $('#searchBook').click(function() {
 });
 
 $('.updatePrice').click(function () {
-    //
+    let priceOld =  $(this).closest('tr').find('td:nth-child(4)').text();
+    $('#myModal').modal('show');
+    $('#priceOld').val(priceOld);
+})
+
+$('#closeModal').click(function() {
+    $('#priceNew').val("");
 })

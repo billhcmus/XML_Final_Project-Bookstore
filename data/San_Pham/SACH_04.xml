@@ -1,0 +1,4 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+    <Sach Ten="Năng Lực Kết Nối" Ma_so="SACH_04" Don_gia_Ban="61224" Don_gia_Nhap="52104" So_luong_ton="4" Doanh_thu="0" Tam_ngung="False">
+        <Nhom_Sach Ten="Khoa học" Ma_so="KHOAHOC" />
+    </Sach>
