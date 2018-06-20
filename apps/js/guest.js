@@ -4,6 +4,13 @@ function getData() {
     xhttp.open('GET', query, false);
     xhttp.send();
     var listBooks = xhttp.responseXML.getElementsByTagName('Sach');
+    var length = listBooks.length;
+    for (let i = 0;i < length;i++) {
+        if (listBooks[i].getAttribute('Tam_ngung') == 'True') {
+            listBooks[i].parentNode.removeChild(listBooks[i]);
+            length--;
+        }
+    }
     return listBooks;
 }
 
@@ -12,13 +19,13 @@ function setListBooksForNewProduct(listBooks) {
         return;
     let length = listBooks.length;
     let html = '';
-    let code, name, exportPrice
+    let code, name, exportPrice, status;
     for (i = 0; i < 9; i++) {
-        code = listBooks[i].getAttribute('Ma_so');
-        name = listBooks[i].getAttribute('Ten');
-        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
-
         random = Math.floor((Math.random() * (length - 1)) + 0);
+        code = listBooks[random].getAttribute('Ma_so');
+        name = listBooks[random].getAttribute('Ten');
+        exportPrice = listBooks[random].getAttribute('Don_gia_Ban');
+
         if (i % 3 === 0)
             html += `<div class="content_grid">`;
 
@@ -32,7 +39,9 @@ function setListBooksForNewProduct(listBooks) {
                                     <div class="cart-left">
                                         <p class="title">${name}</p>
                                     </div>
-                                    <div class="amount item_price">${exportPrice} đ</div>
+                                    <div class="amount item_price special-price">
+                                        <span id="product-price-384150411" class="price">${formatNumber(exportPrice)} đ</span>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -108,4 +117,10 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
     }
     html += '</ul>';
     $("#listBooksForShop").html(html);
+}
+
+function formatNumber(number) {
+    var parts = number.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
 }

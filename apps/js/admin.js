@@ -30,7 +30,7 @@ function setListBooksForAdmin(listBooks, start, end) {
                                     <div class="cart-left">
                                         <p class="title">${name}</p>
                                     </div>
-                                    <div class="mount item_price price">${exportPrice}đ</div>
+                                    <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ function setListBooksForAdmin(listBooks, start, end) {
 }
 
 function changePrice(listBooks) {
-    if ($("#changePrice").length === 0)
+    if ($("#listForChangePrice").length === 0)
         return;
     let length = listBooks.length;
     let html = '';
@@ -63,7 +63,48 @@ function changePrice(listBooks) {
                     <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
                 </tr>`     
     }
-    $("#changePrice").html(html);
+    $("#listForChangePrice").html(html);
+}
+
+function suppendBook(listBooks) {
+    if ($("#listSuppended").length === 0 || $("#listActive").length === 0)
+        return;
+
+    let length = listBooks.length;
+    let html_sup = '', html_act = '';
+    let code, name, exportPrice, suppend;
+
+    for (let i = 0;i < length;i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        suppend = listBooks[i].getAttribute('Tam_ngung');
+        if (suppend == "True") {
+            html_sup += `<tr data-toggle="toggle" data-size="mini">
+                        <td>
+                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                        </td>
+                        <td>${code}</td>
+                        <td>${name}</td>
+                        <td><div style="height: 25px">   
+                            <input type="checkbox" data-toggle="toggle" data-size="mini" class="btn_sup">
+                        </div></td>
+                    </tr>`
+        }
+        else {
+            html_act += `<tr data-toggle="toggle" data-size="mini">
+                        <td>
+                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                        </td>
+                        <td>${code}</td>
+                        <td>${name}</td>
+                        <td><div style="height: 25px">   
+                            <input type="checkbox" checked data-toggle="toggle" data-size="mini">
+                        </div></td>
+                    </tr>`
+        }
+    }
+    $("#listSuppended").html(html_sup);
+    $("#listActive").html(html_act);
 }
 
 function formatNumber(number) {
@@ -72,11 +113,13 @@ function formatNumber(number) {
     return parts.join(".");
 }
 
-//Xử lý view
+//////////////////////////////////////////////////////Xử lý view
 var data = getData();
 setListBooksForAdmin(data, 0, 12);
 changePrice(data);
+suppendBook(data);
 
+////////////////////////////////////////////////////Xử lý phân trang
 $('.page-item:eq(0)').click(function(){
         setListBooksForAdmin(data, 0, 12);
 });
@@ -93,7 +136,6 @@ $('.page-item:eq(4)').click(function(){
     setListBooksForAdmin(data, 48, 50);
 });
 
-//Process panigation
 $('a:not(.button_seeProduct)').click(function() {
     $('#pagination_admin').hide();
 });
@@ -101,35 +143,8 @@ $('.button_seeProduct, .page-item').click(function () {
     $('#pagination_admin').show();
 });
 
-$('#searchBook').click(function() {
-    let content = $('#txtSearchBook').val();
-    let length = data.length;
-    let html = '';
-    let code, name, exportPrice;
-
-    for (i = 0;i < length;i++) {
-        code = data[i].getAttribute('Ma_so');
-        name = data[i].getAttribute('Ten');
-        exportPrice = data[i].getAttribute('Don_gia_Ban');
-        
-        if (name.toUpperCase().includes(content.toUpperCase()) 
-        || code.toUpperCase().includes(content.toUpperCase())) {
-            html += `<tr>
-                        <td>
-                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
-                        </td>
-                        <td>${code}</td>
-                        <td>${name}</td>
-                        <td>${formatNumber(exportPrice)}đ</td>
-                        <td><button type="button" class="btn btn-success updatePrice" data-toggle="modal" data-target="#myModal">Sửa</button></td>
-                    </tr>`
-        }
-    }
-    $("#changePrice").html(html);
-});
-//Nhấn nút sửa
+////////////////////////////////////////////////Nhấn nút sửa
 let obj = undefined;
-
 $('.updatePrice').click(function () {
     let code = $(this).closest('tr').find('td:nth-child(2)').text();
     let name = $(this).closest('tr').find('td:nth-child(3)').text();
@@ -141,15 +156,15 @@ $('.updatePrice').click(function () {
         priceOld
     }
 
-    $('#myModal').modal('show');
+    $('#modalOfPrice').modal('show');
     $('#priceOld').val(obj.priceOld);
-})
-
-//Nhấn nút thoát modal
-$('#closeModal').click(function() {
-    $('#priceNew').val("");
+    $('#closeModalPrice').click(function() {
+        $('#priceNew').val("");
+    });
+    
 });
 
+//////////////////////////////////////////////////// Submit Price
 $("#submit_price").click(function () {
     let priceNew = $('#priceNew').val();
     obj = {
@@ -157,7 +172,7 @@ $("#submit_price").click(function () {
         priceNew
     }
     if (obj) {
-        $.post('http://localhost:1001/CapNhat',
+        $.post('http://localhost:1001/CapNhatGiaBan',
             JSON.stringify(obj),
             (data) =>  {
                 location.reload(true); //load lại trang
@@ -165,5 +180,49 @@ $("#submit_price").click(function () {
             'text'
         );
         return true;
+    }
+});
+
+////////////////////////////////////////////////// Nhấn switch toggle
+$('input[type="checkbox"]').change(function() {
+    let code = $(this).closest('tr').find('td:nth-child(2)').text();
+    let name = $(this).closest('tr').find('td:nth-child(3)').text();
+    let status;
+
+    if($(this).prop("checked") == true)
+        status = "False";
+    else
+        status = "True";
+
+    obj = {
+        code,
+        name,
+        status
+    }
+
+    $('#modalOfStatus').modal('show');
+    $('#closeModalStatus').click(function() {
+        if (status === 'False')
+            $(this).bootstrapToggle('on');
+        else
+            $(this).bootstrapToggle('off');
+    })
+});
+
+/////////////////////////////////////////////// Submit status
+$('#submit_status').click(function() {
+    try {
+        $.post('http://localhost:1001/CapNhatTinhTrang',
+            JSON.stringify(obj),
+            (data) =>  {
+                location.reload(true); //load lại trang
+            },
+            'text'
+        );
+        return true;
+    }
+    catch (err) {
+        console.log(err);
+        return false;
     }
 })

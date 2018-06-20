@@ -5,13 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="sumit kumar">
     <title>Quản lý</title>
     <link rel="shortcut icon" href="./images/favicon.ico" />
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="./css/style_admin.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="./css/bootstrap-toggle.min.css">
 </head>
 
 <body>
@@ -244,9 +243,9 @@
                         <h2>Thống kê sách</h2>
                         <form action="" class="form-inline" role="form" style="margin-bottom: 2%; float: right">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="txtSearchBook" placeholder="Nhập nội dung tìm kiếm">
+                                <input type="text" class="form-control" placeholder="Nhập nội dung tìm kiếm">
                             </div>
-                            <button type="button" id="searchBook" class="btn btn-primary">Tìm kiếm</button>
+                            <button type="button" id="searchBookForChangePrice" class="btn btn-primary">Tìm kiếm</button>
                         </form>
 
                         <table class="table table-striped">
@@ -259,7 +258,7 @@
                                     <th>Thay đổi giá</th>
                                 </tr>
                             </thead>
-                            <tbody id="changePrice">
+                            <tbody id="listForChangePrice">
                             </tbody>
                         </table>
                     </div>
@@ -268,7 +267,68 @@
                     <h2>Tính năng chưa hỗ trợ</h2>
                 </div>
                 <div id="suspendBook" class="tab-pane fade">
-                    <h2>Tính năng chưa hỗ trợ</h2>
+                    <div class="container">
+                        <div id="tab" class="btn-group" data-toggle="buttons-radio">
+                            <a href="#prices2" class="btn btn-large btn-info active" data-toggle="tab">Sản phẩm tạm ngưng</a>
+                            <a href="#features2" class="btn btn-large btn-info" data-toggle="tab">Sản phẩm đang hoạt động</a>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="prices2">
+
+                                <h2>Danh sách tạm ngưng</h2>
+                                <!--
+                                <form action="" class="form-inline" role="form" style="margin-bottom: 2%; float: right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nhập nội dung tìm kiếm">
+                                    </div>
+                                    <button type="button" id="searchBookForStatusSuppended" class="btn btn-primary">Tìm kiếm</button>
+                                </form>
+                            -->
+                                <table class="table table-striped">
+                                    <thead style="background-color: rgb(79, 129, 189); color: white">
+                                        <tr>
+                                            <th>Ảnh</th>
+                                            <th>Mã số</th>
+                                            <th>Tên sách</th>
+                                            <th>Tình trạng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listSuppended">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="tab-pane" id="features2">
+
+                                <h2>Danh sách đang hoạt động</h2>
+                                <!--
+                                <form action="" class="form-inline" role="form" style="margin-bottom: 2%; float: right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nhập nội dung tìm kiếm">
+                                    </div>
+                                    <button type="button" id="searchBookForStatusActive" class="btn btn-primary">Tìm kiếm</button>
+                                </form>
+                            -->
+
+                                <table class="table table-striped">
+                                    <thead style="background-color: rgb(79, 129, 189); color: white">
+                                        <tr>
+                                            <th>Ảnh</th>
+                                            <th>Mã số</th>
+                                            <th>Tên sách</th>
+                                            <th>Tình trạng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listActive">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -292,7 +352,7 @@
                 </ul>
             </nav>
             <!-- page-wrapper END-->
-            <div id="myModal" class="modal fade" role="dialog">
+            <div id="modalOfPrice" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
@@ -311,10 +371,10 @@
 
                                         </div>
                                         <div class="col-sm-6 col-md-6">
-                                           
+
                                             <label for="">Nhập giá thay đổi</label>
                                             <input type="text" class="form-control" id="priceNew" placeholder="Nhập giá sản phẩm">
-                                                
+
                                         </div>
                                     </div>
                                 </div>
@@ -322,18 +382,40 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModalPrice">Close</button>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <div id="modalOfStatus" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+    
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thay đổi tình trạng</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST" role="form" style="margin-left: 1%;">
+                                    <label for="">Bạn chắc chắn muốn thay đổi chứ?</label><br/>
+                                    <button type="submit" class="btn btn-primary" id="submit_status">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModalStatus">No</button>
+                                </form>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
         </div>
 </body>
 <!-- Bootstrap JS form CDN -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="./js/admin.js" async></script>
+<script src="./js/admin.js"></script>
+<script src="./js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".sidebar-toggle").click(function () {
@@ -349,6 +431,94 @@
             $(".sidebar-toggle").show();
             $(".container-2").css("width", "100%");
         });
+
+        $('#searchBookForChangePrice').click(function () {
+            let content = $('input:text').eq(0).val();
+            let length = data.length;
+            let html = '';
+            let code, name, exportPrice;
+
+            for (i = 0; i < length; i++) {
+                code = data[i].getAttribute('Ma_so');
+                name = data[i].getAttribute('Ten');
+                exportPrice = data[i].getAttribute('Don_gia_Ban');
+
+                if (name.toUpperCase().includes(content.toUpperCase())
+                    || code.toUpperCase().includes(content.toUpperCase())) {
+                    html += `<tr>
+                        <td>
+                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                        </td>
+                        <td>${code}</td>
+                        <td>${name}</td>
+                        <td>${formatNumber(exportPrice)}đ</td>
+                        <td><button type="button" class="btn btn-success updatePrice" data-toggle="modal" data-target="#myModal">Sửa</button></td>
+                    </tr>`
+                }
+            }
+            $("#listForChangePrice").html(html);
+        });
+
+
+        $('#searchBookForStatusSuppended').click(function () {
+            let content = $('input:text').eq(1).val();
+            let length = data.length;
+            let html = '';
+            let code, name, suppend;
+
+            for (i = 0; i < length; i++) {
+                code = data[i].getAttribute('Ma_so');
+                name = data[i].getAttribute('Ten');
+                suppend = data[i].getAttribute('Tam_ngung');
+
+                if (name.toUpperCase().includes(content.toUpperCase())
+                    || code.toUpperCase().includes(content.toUpperCase())) {
+                    if (suppend == 'True') {
+                        html += `<tr>
+                                <td>
+                                    <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                                </td>
+                                <td>${code}</td>
+                                <td>${name}</td>
+                                <td><div style="height: 25px">   
+                                    <input type="checkbox" data-toggle="toggle" data-size="mini">
+                                </div></td>
+                            </tr>`
+                    }
+                }
+            }
+            $("#listSuppended").html(html);
+        })
+
+        $('#searchBookForStatusActive').click(function () {
+            let content = $('input:text').eq(2).val();
+            let length = data.length;
+            let html = '';
+            let code, name, suppend;
+
+            for (i = 0; i < length; i++) {
+                code = data[i].getAttribute('Ma_so');
+                name = data[i].getAttribute('Ten');
+                suppend = data[i].getAttribute('Tam_ngung');
+
+                if (name.toUpperCase().includes(content.toUpperCase())
+                    || code.toUpperCase().includes(content.toUpperCase())) {
+                    if (suppend == 'False') {
+                        html += `<tr>
+                                <td>
+                                    <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                                </td>
+                                <td>${code}</td>
+                                <td>${name}</td>
+                                <td><div style="height: 25px">   
+                                    <input type="checkbox" checked data-toggle="toggle" data-size="mini">
+                                </div></td>
+                            </tr>`
+                    }
+                }
+            }
+            $("#listActive").html(html);
+        })
     });
 </script>
 
