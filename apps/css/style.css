@@ -471,17 +471,26 @@ h3.menu_head{
 	margin: 0;
 	font-family: 'Lemonada', cursive;
 }
-ul.nav{
+/* ul.nav{
 	padding:14px 0;
 	list-style:none;
+<<<<<<< HEAD
 	background:#fff;
 }
+=======
+	background:#df4782;
+} */
+>>>>>>> 9d46a8ef790ef7d00622a66e45f625ad4f103164
 ul.nav li:hover {
 	background:#333;
 	color:#fff;
 }
 ul.nav li a{
+<<<<<<< HEAD
 	color:#6a6a6a;
+=======
+	color: #3b5997;
+>>>>>>> 9d46a8ef790ef7d00622a66e45f625ad4f103164
 	font-size:0.85em;
 	text-transform:uppercase;
 	font-weight:400;

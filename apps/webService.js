@@ -32,14 +32,6 @@ app.createServer((req,res) => {
                         '.map' : 'text/plain'
 						}[duoiFile];
 			
-			switch(req.url) {
-				case '/employee.html':
-				{
-					req_url = "/html"+req.url;
-					break;
-				}
-			}
-			
 		    // Đọc file theo req gửi từ Client lên
 		    fs.readFile( __dirname + req_url, (err, data)=>{
 		        if (err) {
