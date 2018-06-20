@@ -52,45 +52,6 @@ app.createServer((req, res) => {
                     });
                 }
                 break;
-                case '/LaySachChoAdmin': {
-                    let options = {
-                        hostname: 'localhost',
-                        port: 1000,
-                        path: '/LaySachChoAdmin',
-                        method: 'GET'
-                    }
-
-                    let httpRes = app.get(options, (response) => {
-                        var body = '';
-                        response.on('error', () => {
-                            console.log('ERROR: Không lấy được danh sách sách');
-                            res.writeHeader(404, { 'Content-Type': 'text/plain' });
-                            res.end("Error 404");
-                        })
-
-                        if (!cacheAdmin) {
-                            response.on('data', (chunk) => {
-                                body += chunk;
-                            }).on('end', () => {
-                                cacheAdmin = body;
-                                res.writeHeader(200, { 'Content-Type': 'text/xml' })
-                                res.end(body);
-                                return;
-                            })
-                            //console.log("Tao cache");
-                        }
-                        else {
-                            res.end(cacheAdmin);
-                            //console.log("Khong tao cache");
-                        }
-                    })
-
-                    httpRes.on('error', function () {
-                        res.writeHeader(404, { 'Content-Type': 'text/plain' });
-                        res.end("Can not get data");
-                    });
-                }
-                    break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' });
                     res.end("Request was not support!!!");

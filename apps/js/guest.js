@@ -3,7 +3,7 @@ function getData() {
     let query = 'http://localhost:1001/LaySach';
     xhttp.open('GET', query, false);
     xhttp.send();
-    let listBooks = JSON.parse(xhttp.responseText);
+    var listBooks = xhttp.responseXML.getElementsByTagName('Sach');
     return listBooks;
 }
 
@@ -12,7 +12,12 @@ function setListBooksForNewProduct(listBooks) {
         return;
     let length = listBooks.length;
     let html = '';
+    let code, name, exportPrice
     for (i = 0; i < 9; i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+
         random = Math.floor((Math.random() * (length - 1)) + 0);
         if (i % 3 === 0)
             html += `<div class="content_grid">`;
@@ -21,13 +26,13 @@ function setListBooksForNewProduct(listBooks) {
                     <a href="single.html">
                         <div class="inner_content">
                             <div class="product_image">
-                                <img src="images/${listBooks[random][0].code}.jpg" class="img-responsive" alt="" />
+                                <img src="images/${code}.jpg" class="img-responsive" alt="" />
                                 <a href="" class="button item_add item_1"> </a>
                                 <div class="product_container">
                                     <div class="cart-left">
-                                        <p class="title">${listBooks[random][1].name}</p>
+                                        <p class="title">${name}</p>
                                     </div>
-                                    <div class="amount item_price">${listBooks[random][1].exportPrice} đ</div>
+                                    <div class="amount item_price">${exportPrice} đ</div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -48,13 +53,19 @@ function setListBooksForBuy(listBooks) {
     let length = listBooks.length;
     let count = 0;
     let html = '<ul id="flexiselDemo3">';
+    let code, name, exportPrice;
+    
     for (i = 0;i < length;i++) {
-        if (listBooks[i][1].name.length < 35) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+
+        if (name.length < 35) {
             html +=     `<li>
-                            <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive"  width="270px" height="324px"/>
+                            <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
                             <div class="grid-flex">
-                                <div href="#">${listBooks[i][1].name}</div>
-                                <p>${listBooks[i][1].exportPrice}</p>
+                                <div href="#">${name}</div>
+                                <p>${exportPrice}</p>
                             </div>
                         </li>`
             count++;
@@ -72,17 +83,22 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
         return;
     let length = listBooks.length;
     let html = '<ul>';
+    let code, name, exportPrice;
     for (i = 0;i < numberBooksOfAPage;i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+
         html += `<li class="simpleCart_shelfItem">
                     <a class="cbp-vm-image" href="./single.html">
                         <div class="inner_content clearfix">
                             <div class="product_image">
-                                <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" />
+                                <img src="images/${code}.jpg" class="img-responsive" alt="" />
                                 <div class="product_container_shop">
                                     <div class="cart-left">
-                                        <p class="title">${listBooks[i][1].name}</p>
+                                        <p class="title">${name}</p>
                                     </div>
-                                    <div class="mount item_price price">${listBooks[i][1].exportPrice} đ</div>
+                                    <div class="mount item_price price">${exportPrice} đ</div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>

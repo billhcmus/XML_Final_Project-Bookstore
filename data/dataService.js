@@ -5,7 +5,7 @@ const port = 1000;
 
 let getMethod = require('./services/getMethod.js');
 
-let cache = getMethod.readData();
+let cache = getMethod.getListBooks();
 
 let session = [];
 
@@ -28,17 +28,10 @@ app.createServer((req, res) => {
             switch(req.url) {
                 case '/LaySach':
                     if (cache) {
-                        let data = getMethod.getListBooks(cache);
-                        res.end(JSON.stringify([...data]));
+                        res.writeHeader(200, {'Content-Type': 'text/xml'})
+                        res.end(cache);
                     }
                     break;
-                case '/LaySachChoAdmin': {
-                    if (cache) {
-                        let data = getMethod.getListBooksForAdmin(cache);
-                        res.end(JSON.stringify([...data]));
-                    }
-                    break;
-                }
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'});
                     res.end("Request was not support!!!");

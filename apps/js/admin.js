@@ -1,9 +1,9 @@
 function getData() {
     let xhttp = new XMLHttpRequest();
-    let query = 'http://localhost:1001/LaySachChoAdmin';
+    let query = 'http://localhost:1001/LaySach';
     xhttp.open('GET', query, false);
     xhttp.send();
-    let listBooks = JSON.parse(xhttp.responseText);
+    var listBooks = xhttp.responseXML.getElementsByTagName('Sach');
     return listBooks;
 }
 
@@ -12,20 +12,25 @@ function setListBooksForAdmin(listBooks, start, end) {
         return;
     let length = listBooks.length;
     let html = `<div class='row'>`;
+    let code, name, exportPrice;
+
     for (i = start;i < end;i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+
         if (i % 4 === 0 && i >= 4)
             html += `</div><div class='row'>`;
         html += `<div class="col-sm-3">
                     <a class="cbp-vm-image" href="./single.html">
                         <div class="inner_content">
                             <div class="product_image" style='margin: 10%'>
-                                <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" style='width: 300px; height: 330px;'/>
+                                <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 300px; height: 330px;'/>
                                 <div class="product_container">
                                     <div class="cart-left">
-                                        <p class="title">${listBooks[i][1].name}</p>
+                                        <p class="title">${name}</p>
                                     </div>
-                                    <div class="mount item_price price">${listBooks[i][1].exportPrice}đ</div>
-                                    <i class="mount sell_number">Đã bán: ${listBooks[i][1].sellNumber}</i>
+                                    <div class="mount item_price price">${exportPrice}đ</div>
                                 </div>
                             </div>
                         </div>
@@ -41,16 +46,20 @@ function changePrice(listBooks) {
         return;
     let length = listBooks.length;
     let html = '';
+    let code, name, exportPrice;
     
     for (let i = 0;i < length;i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+        
         html += `<tr>
                     <td>
-                        <img src="images/${listBooks[i][0].code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                        <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
                     </td>
-                    <td>${listBooks[i][0].code}</td>
-                    <td>${listBooks[i][1].name}</td>
-                    <td value="${listBooks[i][1].sellNumber}">${formatNumber(listBooks[i][1].sellNumber)} cuốn</td>
-                    <td value="${listBooks[i][1].exportPrice}">${listBooks[i][1].exportPrice}đ</td>
+                    <td>${code}</td>
+                    <td>${name}</td>
+                    <td value="${exportPrice}">${formatNumber(exportPrice)}đ</td>
                     <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
                 </tr>`     
     }
@@ -96,17 +105,22 @@ $('#searchBook').click(function() {
     let content = $('#txtSearchBook').val();
     let length = data.length;
     let html = '';
+    let code, name, exportPrice;
+
     for (i = 0;i < length;i++) {
-        if (data[i][1].name.toUpperCase().includes(content.toUpperCase()) 
-        || data[i][1].code.toUpperCase().includes(content.toUpperCase())) {
+        code = data[i].getAttribute('Ma_so');
+        name = data[i].getAttribute('Ten');
+        exportPrice = data[i].getAttribute('Don_gia_Ban');
+        
+        if (name.toUpperCase().includes(content.toUpperCase()) 
+        || code.toUpperCase().includes(content.toUpperCase())) {
             html += `<tr>
                         <td>
-                            <img src="images/${data[i][0].code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
+                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
                         </td>
-                        <td>${data[i][0].code}</td>
-                        <td>${data[i][1].name}</td>
-                        <td value="${listBooks[i][1].sellNumber}">${formatNumber(listBooks[i][1].sellNumber)} cuốn</td>
-                        <td value="${listBooks[i][1].exportPrice}">${formatNumber(listBooks[i][1].exportPrice)}đ</td>
+                        <td>${code}</td>
+                        <td>${name}</td>
+                        <td value="${exportPrice}">${formatNumber(exportPrice)}đ</td>
                         <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
                     </tr>`
         }
