@@ -61,6 +61,54 @@ app.createServer((req, res) => {
             break;
         case 'POST':
             switch (req.url) {
+                case '/CapNhat' : {
+                    // Nhận dữ liệu
+                    var body = '';
+                    req.on('data', function(chunk) {
+                        body += chunk;
+                    });
+                  
+                    //Gửi dữ liệu
+                    req.on('end', function() {
+                        let options = {
+                            hostname: 'localhost',
+                            port: 1000,
+                            path: '/CapNhat',
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'text/plain',
+                                'Access-Control-Allow-Origin': '*'
+                            }
+                        }
+
+                        // Bất đồng bộ
+                        let httpRes = app.request(options, (response) => {
+                            response.on('error', () => {
+                                console.log('ERROR: Không gửi được danh sách sách');
+                                res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                res.end("Error 404");
+                            });
+                            
+                            response.on('data', (chunk) => {
+                                body += chunk;
+                            }).on('end', () => {
+                                res.writeHeader(200, { 'Content-Type': 'text/plain' })
+                                res.end(body);
+                                console.log('-->Done');
+                            }) 
+                        });
+                        
+                        //Gửi dữ liệu lên dataService
+                        httpRes.write(body);
+                        httpRes.end();
+                        httpRes.on('error', function () {
+                            res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                            res.end("Can not send data");
+                        });
+
+                    })
+                }
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' })
                     res.end("Request was not support!!!")

@@ -3,7 +3,8 @@ const url = require('url');
 const query = require('querystring');
 const port = 1000;
 
-let getMethod = require('./services/getMethod.js');
+let getMethod = require('./services/getMethod');
+let saveMethod = require('./services/saveMethod');
 
 let cache = getMethod.getListBooks();
 
@@ -42,6 +43,27 @@ app.createServer((req, res) => {
 
         case 'POST':
             switch(req.url) {
+                case '/CapNhat': {
+                    var body = '';
+                    req.on('data', function(chunk) {
+                        body += chunk;
+                    })
+                    req.on('end', function () {
+                        var data = JSON.parse(body);
+                        var check = saveMethod.changePrice(data);
+                        if (check) {
+                            res.writeHead(200, { 'Content-Type': 'text/plain'});
+                            res.end('Cập nhật giá thành công.');
+                            console.log(' -->Done');
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain'});
+                            res.end('Cập nhật thất bại');
+                            console.log(' -->Fail');
+                        }
+                    })
+                }
+                break;
                 default:
                     res.writeHeader(404, {'Content-Type': 'text/plain'})
                     res.end("Request was not support!!!")

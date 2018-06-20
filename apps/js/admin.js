@@ -127,13 +127,43 @@ $('#searchBook').click(function() {
     }
     $("#changePrice").html(html);
 });
+//Nhấn nút sửa
+let obj = undefined;
 
 $('.updatePrice').click(function () {
+    let code = $(this).closest('tr').find('td:nth-child(2)').text();
+    let name = $(this).closest('tr').find('td:nth-child(3)').text();
     let priceOld =  $(this).closest('tr').find('td:nth-child(4)').text();
+
+    obj = {
+        code,
+        name,
+        priceOld
+    }
+
     $('#myModal').modal('show');
-    $('#priceOld').val(priceOld);
+    $('#priceOld').val(obj.priceOld);
 })
 
+//Nhấn nút thoát modal
 $('#closeModal').click(function() {
     $('#priceNew').val("");
+});
+
+$("#submit_price").click(function () {
+    let priceNew = $('#priceNew').val();
+    obj = {
+        ...obj,
+        priceNew
+    }
+    if (obj) {
+        $.post('http://localhost:1001/CapNhat',
+            JSON.stringify(obj),
+            (data) =>  {
+                location.reload(true); //load lại trang
+            },
+            'text'
+        );
+        return true;
+    }
 })
