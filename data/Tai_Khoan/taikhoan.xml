@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DanhSachTaiKhoan>
+	<TaiKhoan Username="caothuphu2013" Ho_ten="Huỳnh Trọng Thoại" Password="thoai123456" Chuc_vu="admin"
+		Cmnd="312347791" Dia_chi="Gò Công Tây, Tiền Giang"/>
+	<TaiKhoan Username="billphan" Ho_ten="Phan Trọng Thuyên" Password="thuyen123456" Chuc_vu="nhanvien" 
+		Cmnd="312347123" Dia_Chi=""/>
+	<TaiKhoan Username="thunguyen" Ho_ten="Nguyễn Hồ Toàn Thư" Password="huy789" Chuc_vu="nhanvien" 
+		Cmnd="312543324" Dia_Chi="An Phú, An Giang"/>
+</DanhSachTaiKhoan>

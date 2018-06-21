@@ -29,7 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="container">
 		<div class="header-top">
       		 <div class="logo">
-				<a href="../index.html"><img src="../images/logo.png" alt=""/></a>
+				<a href="./index.html"><img src="./images/logo.png" alt=""/></a>
 			 </div>
 		   <div class="header_right">
 			 <ul class="social">
@@ -45,14 +45,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 </div>  
 		 <div class="apparel_box">
 			<ul class="login">
-				<li class="login_text"><a href="../login.html">Đăng nhập</a></li>
+				<li class="login_text"><a href="./login.html">Đăng nhập</a></li>
 				<div class='clearfix'></div>
 		    </ul>
-		    <ul class="quick_access">
-				<li class="view_cart"><a href="../checkout.html">Xem giỏ hàng</a></li>
-				<li class="check"><a href="../checkout.html">Thanh toán</a></li>
-				<div class='clearfix'></div>
-		     </ul>
 			<div class="search">
 			   <input type="text" value="Tìm kiếm" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
 			   <input type="submit" value="">
@@ -68,7 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="menu_box">
 				   	  	<h3 class="menu_head">Menu</h3>
 				   	     <ul class="nav">
-					   	  	<li><a href="../index.html">Trang chủ</a></li>
+					   	  	<li><a href="./index.html">Trang chủ</a></li>
 					   	  	<li><a href="./apparel.html">Cửa hàng</a></li>
 					   	  	<li><a href="./contact.html">Liên hệ</a></li>
 					   	 </ul>
@@ -104,7 +99,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  	<h3>Thành viên</h3>
 				<p>Nếu bạn đã có tài khoản, vui lòng đăng nhập</p>
 				<div id="error_login"></div>
-				<form method="POST">
+				<form id='form_submit' method="POST" action="">
 				  <div>
 					<span>Username<label>*</label></span>
 					<input type="text" name="username" id="username"> 
@@ -114,7 +109,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input type="password" name="password" id="password"> 
 				  </div>
 				  <a class="forgot" href="#">Quên mật khẩu?</a>
-				  <input type="submit" value="Đăng nhập" id="btn_login">
+				  <input type="submit" value="Đăng nhập">
 			    </form>
 			   </div>	
 			   <div class="clearfix"> </div>

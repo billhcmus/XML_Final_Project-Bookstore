@@ -1,5 +1,5 @@
 
-$('#btn_login').click(()=>{
+$('#form_submit').submit(()=>{
     let username = $('#username').val();
     let password = $('#password').val();
     let error = $('#error_login');
@@ -12,14 +12,22 @@ $('#btn_login').click(()=>{
         return false;
     }
     else {
+        let obj = {
+            username,
+            password
+        }
         try {
             $.post('http://localhost:1001/Login',
-                JSON.stringify({
-                    username,
-                    password
-                }),
+                JSON.stringify(obj),
                 (data) =>  {
-                    location.reload(true); //load lại trang
+                    if (data) {
+                        var xmlObj = JSON.parse(data);
+                        let position = xmlObj.position;
+                        if (position == 'admin')
+                            location.href = '/admin.html';
+                        else
+                            location.href = '/nhanvien.html';
+                    }
                 },
                 'text'
             );

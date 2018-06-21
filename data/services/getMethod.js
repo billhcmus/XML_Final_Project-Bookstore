@@ -2,7 +2,7 @@ const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
 const xml2js = require('xml2js');
 const pathSP = __dirname + '/../San_Pham';
-const pathAC = __dirname + '/../Tai_Khoan/taikhoan'
+const pathAC = __dirname + '/../Tai_Khoan/Taikhoan.xml'
 
 //Lấy danh sách truyện
 let getListBooks = () => {
@@ -22,7 +22,7 @@ let getListBooks = () => {
 }
 
 let getAccount = () => {
-    var data = fs.readFileSync(__dirname + pathAC,"utf-8");
+    var data = fs.readFileSync(pathAC,"utf-8");
     var Du_Lieu = new DOMParser().parseFromString(data,"text/xml").documentElement;
     return Du_Lieu.getElementsByTagName('TaiKhoan');
 }

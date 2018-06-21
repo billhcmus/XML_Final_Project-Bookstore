@@ -119,7 +119,6 @@ app.createServer((req, res) => {
                     req.on('data', function(chunk) {
                         body += chunk;
                     });
-
                     req.on('end', function() {
                         request.post({
                             headers: {
@@ -130,16 +129,22 @@ app.createServer((req, res) => {
                             body
                         }, function(error, response, body) {
                             if (error) {
-                                console.log('ERROR: Không lấy cập nhật danh sách sách');
+                                console.log('ERROR: Không trả về tài khoản');
                                 res.writeHeader(404, { 'Content-Type': 'text/plain' });
                                 res.end("Error 404");
                             }
                             res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                            //var data = JSON.parse(body);
                             res.end(body);
-                            console.log('-->Done');
                         });
                     })
+                    //Bắt lỗi request
+                    req.on('error', function(){
+                        res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                        res.end("Error 404");
+                    })
                 }
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' })
                     res.end("Request was not support!!!")

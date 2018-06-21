@@ -25,7 +25,7 @@ function checkAuth(headers) {
 function checkAccount(listAccount, username, password) {
     let length = listAccount.length;
     let user, passw, name, position, cmnd, address;
-    let obj;
+    let obj = {};
     for (let i = 0;i < length;i++) {
         user = listAccount[i].getAttribute('Username');
         passw = listAccount[i].getAttribute('Password');
@@ -124,19 +124,16 @@ app.createServer((req, res) => {
                         if (!cache_Account)
                             cache_Account = getMethod.getAccount();
 
-                        let account = checkAccount(cache_Account, data.username, data.password);
-                        console.log(account);
-                        
-                        if (check) {
+                        var account = checkAccount(cache_Account, data.username, data.password);
+                        if (account) {
                             res.writeHead(200, { 'Content-Type': 'text/plain'});
-                            res.end('Cập nhật giá thành công.');
-                            cache_ListBooks = "";
+                            res.end(JSON.stringify(account));
                             console.log(' -->Done');
                         }
                         else {
-                            res.writeHead(404, { 'Content-Type': 'text/plain'});
-                            res.end('Cập nhật thất bại');
-                            console.log(' -->Fail');
+                            res.writeHead(400, { 'Content-Type': 'text/plain'});
+                            res.end('Tài khoản không tồn tại');
+                            console.log(' -->Fail')
                         }
                     })
                 }   
