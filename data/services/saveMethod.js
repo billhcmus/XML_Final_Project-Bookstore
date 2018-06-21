@@ -46,7 +46,6 @@ let changeStatus = (data) => {
     catch (error) {
         return dalse;
     }
-
 }
 
 module.exports = {

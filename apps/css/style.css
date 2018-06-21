@@ -1494,7 +1494,7 @@ i.mail{
 	color: #4a4a4a;
 	display: block;
 	font-size: 0.8em;
-	margin: 0 0 1.5em 0;
+	margin: 0 0 1em 0;
 	line-height: 1.8em;
 }
 .acount-btn {
@@ -2515,3 +2515,17 @@ h3.like, h3.recent {
 .col-md-9 {
 	border-left: 1px solid #f4f4f4;
 } 
+
+.login-right input[type="password"] {
+	border: 1px solid #EEE;
+	outline-color: #fb4d01;
+	width: 96%;
+	font-size: 0.8125em;
+	padding: 0.5em;
+}
+
+#error_login {
+	color: red;
+	font-size: 13px;
+	font-style: italic;
+}

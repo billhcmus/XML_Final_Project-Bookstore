@@ -1,15 +1,16 @@
 const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
 const xml2js = require('xml2js');
-const path = __dirname + '/../San_Pham';
+const pathSP = __dirname + '/../San_Pham';
+const pathAC = __dirname + '/../Tai_Khoan/taikhoan'
 
 //Lấy danh sách truyện
 let getListBooks = () => {
     listBooks = [];
-    fs.readdirSync(path).forEach(file => {
-        var filePath = path + "/" + file;
+    fs.readdirSync(pathSP).forEach(file => {
+        var filepath = pathSP + "/" + file;
         var parser = new xml2js.Parser();
-        var data = fs.readFileSync(filePath, "utf-8");
+        var data = fs.readFileSync(filepath, "utf-8");
 
         parser.parseString(data, function (err, result) {
             listBooks.push(result);
@@ -20,7 +21,14 @@ let getListBooks = () => {
     return xml;
 }
 
+let getAccount = () => {
+    var data = fs.readFileSync(__dirname + pathAC,"utf-8");
+    var Du_Lieu = new DOMParser().parseFromString(data,"text/xml").documentElement;
+    return Du_Lieu.getElementsByTagName('TaiKhoan');
+}
+
 
 module.exports = {
     getListBooks: getListBooks,
+    getAccount: getAccount
 }
