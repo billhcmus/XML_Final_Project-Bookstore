@@ -74,7 +74,7 @@ function setListBooksForBuy(listBooks) {
                             <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
                             <div class="grid-flex">
                                 <div href="#">${name}</div>
-                                <p>${exportPrice}</p>
+                                <p>${formatNumber(exportPrice)} đ</p>
                             </div>
                         </li>`
             count++;
@@ -107,7 +107,7 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
                                     <div class="cart-left">
                                         <p class="title">${name}</p>
                                     </div>
-                                    <div class="mount item_price price">${exportPrice} đ</div>
+                                    <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
