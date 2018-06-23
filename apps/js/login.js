@@ -19,6 +19,15 @@ $('#form_submit').submit(function (event) {
         $.post('http://localhost:1001/Login',
             JSON.stringify(obj),
             (data) => {
+
+                $.post('http://localhost:1002/KiemTraViTri',
+                    data,
+                    (data) => {
+                        console.log(data);
+                    },
+                    'text'           
+                )
+
                 if (data) {
                     var xmlObj = JSON.parse(data);
                     let position = xmlObj.account.position;
@@ -31,7 +40,7 @@ $('#form_submit').submit(function (event) {
                     if (position === 'admin')
                         location.href = '/admin.html';
                     else if (position === 'nhanvien')
-                        location.href = '/nhanvien.html';
+                        location.href = '/employee.html';
                     return true;
                 }
                 else {
@@ -54,6 +63,14 @@ $('#btn_logout').click(() => {
         $.post('http://localhost:1001/Logout',
             session,
             (data) => {
+                $.post('http://localhost:1002/Logout',
+                    data,
+                    (data) => {
+                        console.log(data);
+                    },      
+                    'text'  
+                )
+
                 sessionStorage.removeItem('session');
                 sessionStorage.removeItem('name');
                 location.href = '/index.html';

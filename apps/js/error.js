@@ -1,0 +1,258 @@
+module.exports = function(res, error) {
+    res.writeHead(404, {
+        'Content-Type': 'text/html; charset=utf-8'
+    });
+    let html = `
+    <!--A Design by W3layouts
+    Author: W3layout
+    Author URL: http://w3layouts.com
+    License: Creative Commons Attribution 3.0 Unported
+    License URL: http://creativecommons.org/licenses/by/3.0/
+    -->
+    <!DOCTYPE HTML>
+    <html>
+    
+    <head>
+        <title>Đăng nhập</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Shape" />
+        <link href="./css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Custom Theme files -->
+        <link href="./css/style.css" rel='stylesheet' type='text/css' />
+        <link href="./css/component.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <!--webfont-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lemonada" rel="stylesheet">
+        <link href="./css/magnific-popup.css" rel="stylesheet" type="text/css">
+    
+    
+    </head>
+    
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="logo">
+                        <a href="./index.html">
+                            <img src="./images/logo.png" alt="" />
+                        </a>
+                    </div>
+                    <div class="header_right">
+                            <a id="btn_login" href="./login.html">Đăng nhập</a>
+                            <a id="name_user" href="#" style="display: none"></a>
+                            <a id="btn_logout" href="#" style="display: none">Đăng xuất</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content_box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="menu_box">
+                                <h3 class="menu_head">Menu</h3>
+                                <ul class="nav">
+                                    <li>
+                                        <a href="./index.html">Trang chủ</a>
+                                    </li>
+                                    <li>
+                                        <a href="./apparel.html">Cửa hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="./contact.html">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="dreamcrub">
+                                <ul class="breadcrumbs">
+                                    <li class="home">
+                                        <a href="./index.html" title="Trở về trang chủ">Trang chủ</a>&nbsp;
+                                        <span>&gt;</span>
+                                    </li>
+                                    <li class="home">&nbsp; &nbsp;Lỗi
+                                        <span>&gt;</span>&nbsp;
+                                    </li>
+                                    <li class="women">
+                                        ${error}
+                                    </li>
+                                </ul>
+                                <ul class="previous">
+                                    <li>
+                                        <a href="./index.html">Trở về trang chủ</a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="page-not-found">
+                                <h1>404</h1>
+                                <h2>${error}</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="brands">
+                <ul class="brand_icons">
+                    <li>
+                        <img src='../images/icon1.jpg' class="img-responsive" alt="MinhlongBook" />
+                    </li>
+                    <li>
+                        <img src='../images/icon2.jpg' class="img-responsive" alt="KimDong" />
+                    </li>
+                    <li>
+                        <img src='../images/icon3.jpg' class="img-responsive" alt="QuangVan" />
+                    </li>
+                    <li>
+                        <img src='../images/icon4.jpg' class="img-responsive" alt="IPM" />
+                    </li>
+                    <li>
+                        <img src='../images/icon5.jpg' class="img-responsive" alt="HoaHocTro" />
+                    </li>
+                    <li>
+                        <img src='../images/icon6.jpg' class="img-responsive" alt="AlPhaBooK" />
+                    </li>
+                    <li class="last">
+                        <img src='../images/icon7.jpg' class="img-responsive" alt="SkyBook" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <ul class="footer_social">
+                <li>
+                    <a href="#">
+                        <i class="fb"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="tw"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pin"> </i>
+                    </a>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <h3>Dịch vụ</h3>
+                    <ul class="list1">
+                        <li>
+                            <a href="#">Điều khoản sử dụng</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách bảo mật</a>
+                        </li>
+                        <li>
+                            <a href="#">Giới thiệu Shape</a>
+                        </li>
+                        <li>
+                            <a href="#">Hệ thống trung tâm - nhà sách</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-grid">
+                    <h3>Hỗ trợ</h3>
+                    <ul class="list1">
+                        <li>
+                            <a href="#">Chính sách đổi-trả-hoàn tiền</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách khách sỉ</a>
+                        </li>
+                        <li>
+                            <a href="#">Phương thức vận chuyển</a>
+                        </li>
+                        <li>
+                            <a href="#">Phương thức thanh toán</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-grid">
+                    <h3>Tài khoản của tôi</h3>
+                    <ul class="list1">
+                        <li>
+                            <a href="#">Đăng nhập/ Tạo tài khoản mới</a>
+                        </li>
+                        <li>
+                            <a href="#">Thay đổi địa chỉ khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="#">Chi tiết tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="#">Lịch sử mua hàng</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-grid">
+                    <h3>Đăng kí nhận tin</h3>
+                    <div class="search_footer">
+                        <input type="text" class="text" value="Điền email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Điền email';}">
+                        <input type="submit" value="Đăng kí">
+                    </div>
+                    <img src="../images/payment.png" class="img-responsive" alt="" />
+                </div>
+                <div class="footer-grid footer-grid_last">
+                    <h3>Liên hệ</h3>
+                    <p class="footer_desc">Nếu có thắc mắc về sản phẩm. Bạn vui lòng liên hệ</p>
+                    <p class="f_text">Điện thoại: &nbsp;&nbsp;&nbsp;012-345-678-91</p>
+                    <p class="email">Email: &nbsp;&nbsp;&nbsp;
+                        <a href="#">info(at)Shape.com</a>
+                    </p>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="container">
+                <div class="copy">
+                    <p>Copyright &copy; 2018 Shape. All Rights Reserved . Design by XML </p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/account.js"></script>
+    <script src="./js/jquery.easydropdown.js"></script>
+    <!-- Add fancyBox main JS and CSS files -->
+    <script src="./js/jquery.magnific-popup.js" type="text/javascript"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+        });
+    </script>
+    
+    </html>
+`
+    res.end(html);
+}

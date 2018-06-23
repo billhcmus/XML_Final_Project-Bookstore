@@ -156,7 +156,6 @@ app.createServer((req, res) => {
                     req.on('data', function(chunk) {
                         body += chunk;
                     });
-                    console.log(body);
                     req.on('end', function() {
                         request.post({
                             headers: {
