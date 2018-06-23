@@ -10,7 +10,7 @@ function validateForm() {
         error.text('Password không đúng định dạng');
         return false;
     }
-    return {username, password};
+    return { username, password };
 }
 
 $('#form_submit').submit(function (event) {
@@ -19,23 +19,23 @@ $('#form_submit').submit(function (event) {
         $.post('http://localhost:1001/Login',
             JSON.stringify(obj),
             (data) => {
+                var xmlObj = JSON.parse(data);
+                var isLogin = xmlObj.isLogin;
+                
+                if (isLogin) {
+                    $.post('http://localhost:1002/KiemTraViTri',
+                        data,
+                        (data) => {
+                            console.log(data);
+                        },
+                        'text'
+                    )
 
-                $.post('http://localhost:1002/KiemTraViTri',
-                    data,
-                    (data) => {
-                        console.log(data);
-                    },
-                    'text'           
-                )
-
-                if (data) {
-                    var xmlObj = JSON.parse(data);
                     let position = xmlObj.account.position;
-
                     //Tạo sessionStorage
                     sessionStorage.setItem('session', xmlObj.session);
                     sessionStorage.setItem('name', xmlObj.account.name);
-                    
+
                     //check
                     if (position === 'admin')
                         location.href = '/admin.html';
@@ -44,7 +44,7 @@ $('#form_submit').submit(function (event) {
                     return true;
                 }
                 else {
-                    alert('Tài khoản mật khẩu không hợp lệ');
+                    $('#error_login').html('Tài khoản mật khẩu không chính xác');
                     return false;
                 }
             },
@@ -67,8 +67,8 @@ $('#btn_logout').click(() => {
                     data,
                     (data) => {
                         console.log(data);
-                    },      
-                    'text'  
+                    },
+                    'text'
                 )
 
                 sessionStorage.removeItem('session');

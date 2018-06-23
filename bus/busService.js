@@ -171,11 +171,21 @@ app.createServer((req, res) => {
                                 console.log('ERROR: Không trả về tài khoản');
                             }
                             else {
-                                res.writeHeader(200, { 'Content-Type': 'text/plain' });
-                                let data = JSON.parse(body);
-                                listSessions.push(data);
-                                res.end(body);
-                                console.log(' -->Done');
+                                if (response.statusCode === 200) {
+                                    res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                    let data = JSON.parse(body);
+                                    if (data.session) {
+                                        listSessions.push(data);
+                                    }
+                                    res.end(body);
+                                    console.log(' -->Done');
+                                }
+                                else {
+                                    console.log(body);
+                                    res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                    res.end(body);
+                                }
+                              
                             }
                         });
       
@@ -194,9 +204,7 @@ app.createServer((req, res) => {
                         session += chunk;
                     });
                     req.on('end', function() {
-                        console.log(session);
                         deleteSession(session);
-                        console.log(listSessions);
                         res.writeHead(200, {
                             'Content-Type': 'text/plain'
                         });

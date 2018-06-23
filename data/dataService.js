@@ -122,27 +122,25 @@ app.createServer((req, res) => {
 
                     req.on('end', function() {
                         let data = JSON.parse(body);
+                        let isLogin = false, session = '';
 
                         if (!cache_Account)
                             cache_Account = getMethod.getAccount();
     
                         var account = checkAccount(cache_Account, data.username, data.password);
                         if (account) {
-                            var session = createSession();
-                            var obj = {
-                                session,
-                                account
-                            }
-                            res.writeHead(200, { 'Content-Type': 'text/plain' });
-                            res.end(JSON.stringify(obj));
-                            console.log(' -->Done');
+                            isLogin = true;
+                            session = createSession();
+                            
                         }
-                        else {
-                            res.writeHead(404, {
-                                'Content-Type': 'text/plain;charset=utf-8'
-                            });
-                            res.end('Tài khoản hoặc mật khẩu không chính xác');
+                        var obj = {
+                            session,
+                            account,
+                            isLogin
                         }
+                        res.writeHead(200, { 'Content-Type': 'text/plain' });
+                        res.end(JSON.stringify(obj));
+                        console.log(' -->Done');
                     })
                 }
                     break;
