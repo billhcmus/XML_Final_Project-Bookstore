@@ -46,7 +46,7 @@ app.createServer((req, res) => {
                                 res.end(cache);
                             }
                         }
-                    })  
+                    });
                 }
                 break;
                 default:
@@ -129,10 +129,12 @@ app.createServer((req, res) => {
                                     res.writeHeader(404, { 'Content-Type': 'text/plain' });
                                     res.end("Error 404");
                                 }
-                                res.writeHeader(200, { 'Content-Type': 'text/plain' });
-                                res.end(body);
-                                cache = "";
-                                console.log('-->Done');
+                                else {
+                                    res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                    res.end(body);
+                                    cache = "";
+                                    console.log('-->Done');
+                                }
                             })
                         }
                         else {
@@ -187,21 +189,22 @@ app.createServer((req, res) => {
                     })
                 }
                 break;
-                /*
                 case '/Logout' : {
                     var session = '';
                     req.on('data', function(chunk) {
                         session += chunk;
                     });
-                    console.log(session);
-                    deleteSession(session);
-                    console.log(listSessions);
-                    res.writeHead(200, {
-                        'Content-Type': 'text/plain'
-                    });
-                    res.end("OK");
+                    req.on('end', function() {
+                        console.log(session);
+                        deleteSession(session);
+                        console.log(listSessions);
+                        res.writeHead(200, {
+                            'Content-Type': 'text/plain'
+                        });
+                        res.end("OK");
+                    })
                 }
-                break;*/
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' })
                     res.end("Request was not support!!!")

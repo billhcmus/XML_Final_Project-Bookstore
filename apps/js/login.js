@@ -49,7 +49,19 @@ $('#form_submit').submit(function (event) {
 });
 
 $('#btn_logout').click(() => {
-    sessionStorage.removeItem('session');
-    sessionStorage.removeItem('name');
-    location.reload();
+    let session = sessionStorage.getItem('session');
+    try {
+        $.post('http://localhost:1001/Logout',
+            session,
+            (data) => {
+                sessionStorage.removeItem('session');
+                sessionStorage.removeItem('name');
+                location.href = '/index.html';
+            },
+            'text'
+        )
+    }
+    catch (err) {
+        console.log(err);
+    }
 })

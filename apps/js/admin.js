@@ -172,7 +172,6 @@ $("#submit_price").click(function () {
         priceNew,
         session: sessionStorage.getItem('session')
     }
-    console.log(obj);
     if (obj) {
         $.post('http://localhost:1001/CapNhatGiaBan',
             JSON.stringify(obj),
@@ -180,7 +179,7 @@ $("#submit_price").click(function () {
                 location.reload(true); //load lại trang
             },
             'text'
-        );
+        )
         return true;
     }
 });

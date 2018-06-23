@@ -1,5 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
-    <Sach Ten="Ứng Dụng Tin Học Triển Khai Hiệu Quả Chương Trình CDIO Và HEEAP" Ma_so="SACH_09" Don_gia_Ban="60102" Don_gia_Nhap="54938"
-        So_luong_ton="16" Doanh_thu="0" Tam_ngung="False">
-        <Nhom_Sach Ten="Tin học" Ma_so="TINHOC" />
+<?xml version="1.0" encoding="UTF-8"?>
+<Sach Ten="Ứng Dụng Tin Học Triển Khai Hiệu Quả Chương Trình CDIO Và HEEAP" Ma_so="SACH_09" Don_gia_Ban="60102" Don_gia_Nhap="54938" So_luong_ton="16" Doanh_thu="0" Tam_ngung="True">
+        <Nhom_Sach Ten="Tin học" Ma_so="TINHOC"/>
     </Sach>
