@@ -4,12 +4,28 @@ const request = require('request');
 
 const port = 1001;
 let cache = "";
+let listSessions = [];
 
+
+function checkSession(session) {
+    let length = listSessions.length;
+    for (let i = 0;i < length;i++) {
+        if (session === listSessions[i].session)
+            return i;
+    }
+    return -1;
+}
+
+function deleteSession(session) {
+    let check = checkSession(session);
+    if (check !== -1) {
+        listSessions.splice(check, 1);
+    }
+}
 
 app.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(`${req.method} ${req.url}`);
-
     switch (req.method) {
         case 'GET':
             switch (req.url) {
@@ -52,24 +68,34 @@ app.createServer((req, res) => {
                     
                     //Gửi dữ liệu
                     req.on('end', function() {
-                        request.post({
-                            headers: {
-                                'Content-Type': 'text/plain',
-                                'Access-Control-Allow-Origin': '*'
-                            },
-                            url: 'http://localhost:1000/CapNhatGiaBan',
-                            body
-                        }, function(error, response, body) {
-                            if (error) {
-                                console.log('ERROR: Không lấy cập nhật danh sách sách');
-                                res.writeHeader(404, { 'Content-Type': 'text/plain' });
-                                res.end("Error 404");
-                            }
-                            res.writeHeader(200, { 'Content-Type': 'text/plain' });
-                            res.end(body);
-                            cache = "";
-                            console.log('-->Done');
-                        })
+                        let data = JSON.parse(body);
+                        let session = data.session;
+                        if (checkSession(session) != -1) {
+                            request.post({
+                                headers: {
+                                    'Content-Type': 'text/plain',
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                url: 'http://localhost:1000/CapNhatGiaBan',
+                                body
+                            }, function(error, response, body) {
+                                if (error) {
+                                    console.log('ERROR: Không lấy cập nhật danh sách sách');
+                                    res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                    res.end("Error 404");
+                                } 
+                                else {
+                                    res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                    res.end(body);
+                                    cache = "";
+                                    console.log('-->Done');
+                                }
+                            })
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain;charset=utf-8'});
+                            res.end('Vui lòng đăng nhập lại');
+                        }
                     });
 
                     //Bắt lỗi request
@@ -87,24 +113,33 @@ app.createServer((req, res) => {
                     });
                     
                     req.on('end', function() {
-                        request.post({
-                            headers: {
-                                'Content-Type': 'text/plain',
-                                'Access-Control-Allow-Origin': '*'
-                            },
-                            url: 'http://localhost:1000/CapNhatTinhTrang',
-                            body
-                        }, function(error, response, body) {
-                            if (error) {
-                                console.log('ERROR: Không lấy cập nhật danh sách sách');
-                                res.writeHeader(404, { 'Content-Type': 'text/plain' });
-                                res.end("Error 404");
-                            }
-                            res.writeHeader(200, { 'Content-Type': 'text/plain' });
-                            res.end(body);
-                            cache = "";
-                            console.log('-->Done');
-                        })
+                        let data = JSON.parse(body);
+                        let session = data.session;
+                        if (checkSession(session) != -1) {
+                            request.post({
+                                headers: {
+                                    'Content-Type': 'text/plain',
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                url: 'http://localhost:1000/CapNhatTinhTrang',
+                                body
+                            }, function(error, response, body) {
+                                if (error) {
+                                    console.log('ERROR: Không lấy cập nhật danh sách sách');
+                                    res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                    res.end("Error 404");
+                                }
+                                res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                res.end(body);
+                                cache = "";
+                                console.log('-->Done');
+                            })
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain;charset=utf-8'});
+                            res.end('Vui lòng đăng nhập lại');
+                        }
+                        
                     });
 
                     //Bắt lỗi request
@@ -119,6 +154,7 @@ app.createServer((req, res) => {
                     req.on('data', function(chunk) {
                         body += chunk;
                     });
+                    console.log(body);
                     req.on('end', function() {
                         request.post({
                             headers: {
@@ -129,15 +165,21 @@ app.createServer((req, res) => {
                             body
                         }, function(error, response, body) {
                             if (error) {
-                                console.log('ERROR: Không trả về tài khoản');
                                 res.writeHeader(404, { 'Content-Type': 'text/plain' });
-                                res.end("Error 404");
+                                res.end(body);
+                                console.log('ERROR: Không trả về tài khoản');
                             }
-                            res.writeHeader(200, { 'Content-Type': 'text/plain' });
-                            //var data = JSON.parse(body);
-                            res.end(body);
+                            else {
+                                res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                let data = JSON.parse(body);
+                                listSessions.push(data);
+                                res.end(body);
+                                console.log(' -->Done');
+                            }
                         });
+      
                     })
+                  
                     //Bắt lỗi request
                     req.on('error', function(){
                         res.writeHeader(404, { 'Content-Type': 'text/plain' });
@@ -145,6 +187,21 @@ app.createServer((req, res) => {
                     })
                 }
                 break;
+                /*
+                case '/Logout' : {
+                    var session = '';
+                    req.on('data', function(chunk) {
+                        session += chunk;
+                    });
+                    console.log(session);
+                    deleteSession(session);
+                    console.log(listSessions);
+                    res.writeHead(200, {
+                        'Content-Type': 'text/plain'
+                    });
+                    res.end("OK");
+                }
+                break;*/
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' })
                     res.end("Request was not support!!!")

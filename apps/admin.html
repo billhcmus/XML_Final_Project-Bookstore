@@ -18,16 +18,19 @@
     <nav class="navbar navbar-inverse top-navbar" id="top-nav">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img class="img-responsive" src="https://lh3.googleusercontent.com/-N4NB2F966TU/WM7V1KYusRI/AAAAAAAADtA/fPvGVNzOkCo7ZMqLI6pPITE9ZF7NONmawCJoC/w185-h40-p-rw/logo.png"
-                        width="150" height="20">
-                </a>
+
                 <a href="javascript:0;" class="sidebar-toggle">
                     <i class="fa fa-bars"></i>
                 </a>
                 <span class="close-btn" id="hide-btn">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </span>
+
+            </div>
+            <div style="float: right; padding: 1%;">
+                <a href="./index.html" data-toggle="tooltip" title="Trở về trang chủ">
+                    <img src="./images/home.png" alt="" srcset="" style="width: 32px; height: 32px">
+                </a>
             </div>
         </div>
     </nav>
@@ -41,9 +44,8 @@
                 <img class="img-circle" src="./images/admin.jpg" width="140px" height="148px" alt="Nhung Gumiho">
                 <p class="welcome">
                     <i class="fa fa-key"></i> Đã Đăng Nhập</p>
-                <p class="name tooltip-sidebar-logout"> Nhung
-                    <span class="last-name">Gumiho</span>
-                    <a href="./index.html">
+                <p class="name tooltip-sidebar-logout" id="name_user">
+                    <a href="./index.html" id='btn_logout'>
                         <i class="fa fa-sign-out"></i>
                     </a>
                 </p>
@@ -143,7 +145,7 @@
                             <li class="pull-right">
                                 <div id="reportrange" class="btn btn-green btn-square date-picker">
                                     <i class="fa fa-calendar"></i>
-                                    <span class="date-range">February 15, 2018 - March 16, 2018</span>
+                                    <span class="date-range"></span>
                                     <i class="fa fa-caret-down"></i>
                                 </div>
                             </li>
@@ -412,12 +414,17 @@
         </div>
 </body>
 <!-- Bootstrap JS form CDN -->
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 <script src="./js/admin.js"></script>
+<script src="./js/account.js"></script>
 <script src="./js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        var date = new Date();
+
+        $(".date-range").html(date);
+
         $(".sidebar-toggle").click(function () {
             $(this).hide();
             $("#user-profil").show();

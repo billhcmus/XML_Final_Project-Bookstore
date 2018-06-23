@@ -1,5 +1,4 @@
-
-$('#form_submit').submit(()=>{
+function validateForm() {
     let username = $('#username').val();
     let password = $('#password').val();
     let error = $('#error_login');
@@ -8,35 +7,49 @@ $('#form_submit').submit(()=>{
         return false;
     }
     else if (!password) {
-        error.html('Password không đúng định dạng');
+        error.text('Password không đúng định dạng');
         return false;
     }
-    else {
-        let obj = {
-            username,
-            password
-        }
-        try {
-            $.post('http://localhost:1001/Login',
-                JSON.stringify(obj),
-                (data) =>  {
-                    if (data) {
-                        var xmlObj = JSON.parse(data);
-                        let position = xmlObj.position;
-                        if (position == 'admin')
-                            location.href = '/admin.html';
-                        else
-                            location.href = '/nhanvien.html';
-                    }
-                },
-                'text'
-            );
-            return true;
-        }
-        catch (err) {
-            console.log(err);
-            return false;
-        }
-    }
+    return {username, password};
+}
 
+$('#form_submit').submit(function (event) {
+    let obj = validateForm();
+    try {
+        $.post('http://localhost:1001/Login',
+            JSON.stringify(obj),
+            (data) => {
+                if (data) {
+                    var xmlObj = JSON.parse(data);
+                    let position = xmlObj.account.position;
+
+                    //Tạo sessionStorage
+                    sessionStorage.setItem('session', xmlObj.session);
+                    sessionStorage.setItem('name', xmlObj.account.name);
+                    
+                    //check
+                    if (position === 'admin')
+                        location.href = '/admin.html';
+                    else if (position === 'nhanvien')
+                        location.href = '/nhanvien.html';
+                    return true;
+                }
+                else {
+                    alert('Tài khoản mật khẩu không hợp lệ');
+                    return false;
+                }
+            },
+            'text'
+        );
+    }
+    catch (err) {
+        console.log(err);
+        return false;
+    }
+});
+
+$('#btn_logout').click(() => {
+    sessionStorage.removeItem('session');
+    sessionStorage.removeItem('name');
+    location.reload();
 })

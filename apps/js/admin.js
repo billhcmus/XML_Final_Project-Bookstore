@@ -169,8 +169,10 @@ $("#submit_price").click(function () {
     let priceNew = $('#priceNew').val();
     obj = {
         ...obj,
-        priceNew
+        priceNew,
+        session: sessionStorage.getItem('session')
     }
+    console.log(obj);
     if (obj) {
         $.post('http://localhost:1001/CapNhatGiaBan',
             JSON.stringify(obj),
@@ -197,7 +199,8 @@ $('input[type="checkbox"]').change(function() {
     obj = {
         code,
         name,
-        status
+        status,
+        session: sessionStorage.getItem('session')
     }
 
     $('#modalOfStatus').modal('show');
@@ -225,4 +228,4 @@ $('#submit_status').click(function() {
         console.log(err);
         return false;
     }
-})
+});
