@@ -97,19 +97,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<h3 class="menu_head">Thể loại</h3>
 							<ul class="category_nav">
 								<li>
-									<a href="#">Tin học</a>
+									<a href="/apparel.html?theloai=TINHOC">Tin học</a>
 								</li>
 								<li>
-									<a href="#">Điện - Điện tử</a>
+									<a href="/apparel.html?theloai=DIEN">Điện - Điện tử</a>
 								</li>
 								<li>
-									<a href="#">Kinh tế</a>
+									<a href="/apparel.html?theloai=KINHTE">Kinh tế</a>
 								</li>
 								<li>
-									<a href="#">Văn học</a>
+									<a href="/apparel.html?theloai=VANHOC">Văn học</a>
 								</li>
 								<li>
-									<a href="#">Khoa học vũ trụ</a>
+									<a href="/apparel.html?theloai=KHOAHOC">Khoa học vũ trụ</a>
 								</li>
 							</ul>
 						</div>
@@ -193,18 +193,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									</a>
 								</div>
 							</div>
-							<ul class="women_pagenation dc_paginationA dc_paginationA06">
-								<li>
-									<a href="#" class="previous">Trang:</a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li>
-									<a href="#">2</a>
-								</li>
-							</ul>
-							<div class="clearfix"></div>
 						</div>
 						<div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
 							<div class="cbp-vm-options">
@@ -364,10 +352,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script async>
 	let data = getData();
 	let numberBooks = 9;
-	setListBooksForShop(data, numberBooks);
-	function run() {
-		numberBooks = document.getElementById("numberBooksDisplay").value;
+	if (location.search) {
+		$('.pages').hide();
+		setListBooksbyCategory(data, location.search);
+	}
+	else {
 		setListBooksForShop(data, numberBooks);
+		function run() {
+			$('.pages').show();
+			numberBooks = document.getElementById("numberBooksDisplay").value;
+			setListBooksForShop(data, numberBooks);
+		}
 	}
 </script>
 <script src="./js/simpleCart.min.js"></script>

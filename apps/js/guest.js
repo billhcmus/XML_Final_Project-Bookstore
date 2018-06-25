@@ -92,28 +92,67 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
         return;
     let length = listBooks.length;
     let html = '<ul>';
-    let code, name, exportPrice;
+    let code, name, exportPrice, category;
+
     for (i = 0;i < numberBooksOfAPage;i++) {
         code = listBooks[i].getAttribute('Ma_so');
         name = listBooks[i].getAttribute('Ten');
         exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
 
-        html += `<li class="simpleCart_shelfItem">
-                    <a class="cbp-vm-image" href="./single.html">
-                        <div class="inner_content clearfix">
-                            <div class="product_image">
-                                <img src="images/${code}.jpg" class="img-responsive" alt="" />
-                                <div class="product_container_shop">
-                                    <div class="cart-left">
-                                        <p class="title">${name}</p>
-                                    </div>
-                                    <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
-                                    <div class="clearfix"></div>
-                                </div>
+            html += `<li class="simpleCart_shelfItem">
+            <a class="cbp-vm-image" href="./single.html">
+                <div class="inner_content clearfix">
+                    <div class="product_image">
+                        <img src="images/${code}.jpg" class="img-responsive" alt="" />
+                        <div class="product_container_shop">
+                            <div class="cart-left">
+                                <p class="title">${name}</p>
                             </div>
+                            <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
+                            <div class="clearfix"></div>
                         </div>
-                    </a>
-                </li>`
+                    </div>
+                </div>
+            </a>
+        </li>`
+    }
+    html += '</ul>';
+    $("#listBooksForShop").html(html);
+}
+
+function setListBooksbyCategory(listBooks , categoryQuery) {
+    if ($("#listBooksForShop").length === 0)
+        return;
+    let length = listBooks.length;
+    let html = '<ul>';
+    let code, name, exportPrice, category;
+
+    let nameOfCategory = parseQuery(categoryQuery);
+
+    for (i = 0;i < length;i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+        category = listBooks[i].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
+
+        if (category == nameOfCategory) {
+            html += `<li class="simpleCart_shelfItem">
+            <a class="cbp-vm-image" href="./single.html">
+                <div class="inner_content clearfix">
+                    <div class="product_image">
+                        <img src="images/${code}.jpg" class="img-responsive" alt="" />
+                        <div class="product_container_shop">
+                            <div class="cart-left">
+                                <p class="title">${name}</p>
+                            </div>
+                            <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>`
+        }
     }
     html += '</ul>';
     $("#listBooksForShop").html(html);
@@ -123,4 +162,9 @@ function formatNumber(number) {
     var parts = number.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
+}
+
+function parseQuery(params) {
+    let index = params.lastIndexOf('=');
+    return params.slice(index + 1);
 }
