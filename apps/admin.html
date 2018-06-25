@@ -11,6 +11,8 @@
     <link href="./css/style_admin.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 </head>
 
 <body>
@@ -242,14 +244,7 @@
                 <div id="changePriceBooks" class="tab-pane fade">
                     <div class="container">
                         <h2>Thống kê sách</h2>
-                        <form action="" class="form-inline" role="form" style="margin-bottom: 2%; float: right">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nhập nội dung tìm kiếm">
-                            </div>
-                            <button type="button" id="searchBookForChangePrice" class="btn btn-primary">Tìm kiếm</button>
-                        </form>
-
-                        <table class="table table-striped">
+                        <table class="table table-striped" id='tableChangePrice'>
                             <thead style="background-color: rgb(79, 129, 189); color: white">
                                 <tr>
                                     <th>Ảnh</th>
@@ -285,7 +280,7 @@
                                     <button type="button" id="searchBookForStatusSuppended" class="btn btn-primary">Tìm kiếm</button>
                                 </form>
                             -->
-                                <table class="table table-striped">
+                                <table class="table table-striped" id='tableSuppended'>
                                     <thead style="background-color: rgb(79, 129, 189); color: white">
                                         <tr>
                                             <th>Ảnh</th>
@@ -312,7 +307,7 @@
                                 </form>
                             -->
 
-                                <table class="table table-striped">
+                                <table class="table table-striped" id = 'tableActive'>
                                     <thead style="background-color: rgb(79, 129, 189); color: white">
                                         <tr>
                                             <th>Ảnh</th>
@@ -336,19 +331,19 @@
             <nav id='pagination_admin' aria-label="Page navigation" style="text-align: center">
                 <ul class="pagination pagination-lg">
                     <li class="page-item" style="display: inline-block; cursor: pointer">
-                        <a class="page-link">1</a>
+                        <a href="/admin.html?view=0" class="page-link">1</a>
                     </li>
                     <li class="page-item" style="display: inline-block; cursor: pointer">
-                        <a class="page-link">2</a>
+                        <a href="/admin.html?view=1" class="page-link">2</a>
                     </li>
                     <li class="page-item" style="display: inline-block; cursor: pointer">
-                        <a class="page-link">3</a>
+                        <a href="/admin.html?view=2" class="page-link">3</a>
                     </li>
                     <li class="page-item" style="display: inline-block; cursor: pointer">
-                        <a class="page-link">4</a>
+                        <a href="/admin.html?view=3" class="page-link">4</a>
                     </li>
                     <li class="page-item" style="display: inline-block; cursor: pointer">
-                        <a class="page-link">5</a>
+                        <a href="/admin.html?view=4" class="page-link">5</a>
                     </li>
                 </ul>
             </nav>
@@ -419,8 +414,13 @@
 <script src="./js/account.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/bootstrap-toggle.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#tableChangePrice').DataTable();
+        $('#tableSuppended').DataTable();
+        $('#tableActive').DataTable();
         var date = new Date();
 
         $(".date-range").html(date);
@@ -438,94 +438,6 @@
             $(".sidebar-toggle").show();
             $(".container-2").css("width", "100%");
         });
-
-        $('#searchBookForChangePrice').click(function () {
-            let content = $('input:text').eq(0).val();
-            let length = data.length;
-            let html = '';
-            let code, name, exportPrice;
-
-            for (i = 0; i < length; i++) {
-                code = data[i].getAttribute('Ma_so');
-                name = data[i].getAttribute('Ten');
-                exportPrice = data[i].getAttribute('Don_gia_Ban');
-
-                if (name.toUpperCase().includes(content.toUpperCase())
-                    || code.toUpperCase().includes(content.toUpperCase())) {
-                    html += `<tr>
-                        <td>
-                            <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
-                        </td>
-                        <td>${code}</td>
-                        <td>${name}</td>
-                        <td>${formatNumber(exportPrice)}đ</td>
-                        <td><button type="button" class="btn btn-success updatePrice" data-toggle="modal" data-target="#myModal">Sửa</button></td>
-                    </tr>`
-                }
-            }
-            $("#listForChangePrice").html(html);
-        });
-
-
-        $('#searchBookForStatusSuppended').click(function () {
-            let content = $('input:text').eq(1).val();
-            let length = data.length;
-            let html = '';
-            let code, name, suppend;
-
-            for (i = 0; i < length; i++) {
-                code = data[i].getAttribute('Ma_so');
-                name = data[i].getAttribute('Ten');
-                suppend = data[i].getAttribute('Tam_ngung');
-
-                if (name.toUpperCase().includes(content.toUpperCase())
-                    || code.toUpperCase().includes(content.toUpperCase())) {
-                    if (suppend == 'True') {
-                        html += `<tr>
-                                <td>
-                                    <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
-                                </td>
-                                <td>${code}</td>
-                                <td>${name}</td>
-                                <td><div style="height: 25px">   
-                                    <input type="checkbox" data-toggle="toggle" data-size="mini">
-                                </div></td>
-                            </tr>`
-                    }
-                }
-            }
-            $("#listSuppended").html(html);
-        })
-
-        $('#searchBookForStatusActive').click(function () {
-            let content = $('input:text').eq(2).val();
-            let length = data.length;
-            let html = '';
-            let code, name, suppend;
-
-            for (i = 0; i < length; i++) {
-                code = data[i].getAttribute('Ma_so');
-                name = data[i].getAttribute('Ten');
-                suppend = data[i].getAttribute('Tam_ngung');
-
-                if (name.toUpperCase().includes(content.toUpperCase())
-                    || code.toUpperCase().includes(content.toUpperCase())) {
-                    if (suppend == 'False') {
-                        html += `<tr>
-                                <td>
-                                    <img src="images/${code}.jpg" class="img-responsive" alt="" style='width: 25px; height: 25px;'/>
-                                </td>
-                                <td>${code}</td>
-                                <td>${name}</td>
-                                <td><div style="height: 25px">   
-                                    <input type="checkbox" checked data-toggle="toggle" data-size="mini">
-                                </div></td>
-                            </tr>`
-                    }
-                }
-            }
-            $("#listActive").html(html);
-        })
     });
 </script>
 

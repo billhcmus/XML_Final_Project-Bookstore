@@ -44,9 +44,9 @@ function setListBooksForAdmin(listBooks, start, end) {
 function changePrice(listBooks) {
     if ($("#listForChangePrice").length === 0)
         return;
-    let length = listBooks.length;
     let html = '';
     let code, name, exportPrice;
+    let length = listBooks.length;
     
     for (let i = 0;i < length;i++) {
         code = listBooks[i].getAttribute('Ma_so');
@@ -107,34 +107,25 @@ function suppendBook(listBooks) {
     $("#listActive").html(html_act);
 }
 
-function formatNumber(number) {
-    var parts = number.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-}
 
 //////////////////////////////////////////////////////Xử lý view
 var data = getData();
-setListBooksForAdmin(data, 0, 12);
+let params = location.search;
+let key = parseQuery(params).key;
+let value = parseQuery(params).value;
+
 changePrice(data);
 suppendBook(data);
 
-////////////////////////////////////////////////////Xử lý phân trang
-$('.page-item:eq(0)').click(function(){
-        setListBooksForAdmin(data, 0, 12);
-});
-$('.page-item:eq(1)').click(function(){
-    setListBooksForAdmin(data, 12, 24);
-});
-$('.page-item:eq(2)').click(function(){
-    setListBooksForAdmin(data, 24, 36);
-});
-$('.page-item:eq(3)').click(function(){
-    setListBooksForAdmin(data, 36, 48);
-});
-$('.page-item:eq(4)').click(function(){
-    setListBooksForAdmin(data, 48, 50);
-});
+switch (key) {
+    case 'view': {
+        paginationView(data, value);
+        break;
+    }
+    default: {
+        setListBooksForAdmin(data, 0 ,12);
+    }   
+}
 
 $('a:not(.button_seeProduct)').click(function() {
     $('#pagination_admin').hide();
@@ -142,6 +133,8 @@ $('a:not(.button_seeProduct)').click(function() {
 $('.button_seeProduct, .page-item').click(function () {
     $('#pagination_admin').show();
 });
+
+
 
 ////////////////////////////////////////////////Nhấn nút sửa
 let obj = undefined;
@@ -228,3 +221,27 @@ $('#submit_status').click(function() {
         return false;
     }
 });
+
+///////////////////////////////////////////////////Phân trang
+
+function paginationView(data, value) {
+    value = +value;
+    end = (value * 12 + 12) < data.length ? (value * 12 + 12) : data.length; 
+    setListBooksForAdmin(data, value * 12, end);
+}
+
+function parseQuery(params) {
+    let indexEqual = params.lastIndexOf('=');
+    let indexQuestionMark = params.lastIndexOf('?');
+
+    return {
+        key: params.slice(indexQuestionMark + 1, indexEqual),
+        value: params.slice(indexEqual + 1)
+    }
+}
+
+function formatNumber(number) {
+    var parts = number.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
