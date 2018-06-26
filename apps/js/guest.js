@@ -255,20 +255,26 @@ function setBookSameCategory(listBooks, codeQuery) {
     let nameOfCategory = listBooks[parseCode(codeBookChoose) - 1].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
     html = `<ul id="flexiselDemo3">`;
     for (i = 0; i < length; i++) {
-        category = listBooks[i].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
-        if (category == nameOfCategory) {
-            code = listBooks[i].getAttribute('Ma_so');
-            name = listBooks[i].getAttribute('Ten');
-            exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+        if (i === parseCode(codeBookChoose) - 1)
+            continue;
+        else {
+            category = listBooks[i].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
+            if (category == nameOfCategory) {
+                code = listBooks[i].getAttribute('Ma_so');
+                name = listBooks[i].getAttribute('Ten');
+                exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
 
-            html += `<li>
-                    <a href="/single.html?Ma_so=${code}">
-                    <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
-                    <div class="grid-flex">
-                        <div>${name}</div>
-                        <p>${formatNumber(exportPrice)} đ</p>
-                    </div>
-                </a>`
+                if (name.length < 40) {
+                    html += `<li>
+                        <a href="/single.html?Ma_so=${code}">
+                        <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
+                        <div class="grid-flex">
+                            <p>${name}</p>
+                            <p>${formatNumber(exportPrice)} đ</p>
+                        </div>
+                    </a>`
+                }  
+            }
         }
     }
     html += `</ul>`

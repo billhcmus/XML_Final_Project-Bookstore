@@ -875,14 +875,14 @@ p.footer_desc{
 }
 p.f_text{
 	color:#c4011a;
-	font-size: 0.95em;
+	font-size: 0.9em;
 	font-weight: bold;
 	margin-bottom:0.5em;
 }
 p.email{
 	color:#c4011a;
-	font-size:1.00em;
-	font-weight: bold
+	font-size: 0.9em;
+	font-weight: bold;
 }
 p.email a{
 	color:#c4011a;
@@ -1214,7 +1214,7 @@ h3.recent{
 	position: relative;
 }
 .grid-flex{
-    margin:20px 0 20px 0;
+    margin:10px 0 10px 0;
 }
 
 .nbs-flexisel-item a {
@@ -1524,7 +1524,7 @@ i.mail{
 	padding: 1em 0;
 }
 .login-right form div {
-	padding: 0 0 0.5em 0;
+	padding: 0 0 1.5em 0;
 }
 .login-right span {
 	color: #4a4a4a;
@@ -2549,7 +2549,6 @@ h3.like, h3.recent {
 	text-decoration: none;
 	font-size: 18px;
 }
-
 #btn_login {
 	float: right;
 	display: inline-block;
