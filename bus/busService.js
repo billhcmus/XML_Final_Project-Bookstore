@@ -109,6 +109,53 @@ app.createServer((req, res) => {
 
                 }
                     break;
+
+                case '/ThemPhieuBan': {
+                    var body = '';
+
+                    // Nhận dữ liệu từ webservice
+                    req.on('data', function(chunk) {
+                        body += chunk;
+                    });
+
+                    // Gửi dữ liệu xuống dataService
+                    req.on('end', function() {
+                        let data = JSON.parse(body);
+                        let session = data.session;
+                        if (checkSession(session) != -1) {
+                            request.post({
+                                headers: {
+                                    'Content-Type': 'text/plain',
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                url: 'http://localhost:1000/ThemPhieuBan',
+                                body
+                            }, function (error, response, body) {
+                                if (error) {
+                                    console.log('ERROR');
+                                    res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                    res.end("Error 404");
+                                }
+                                else {
+                                    res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                    res.end(body);
+                                    cache = "";
+                                    console.log('-->Done');
+                                }
+                            });
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain;charset=utf-8' });
+                            res.end('Vui lòng đăng nhập lại');
+                        }
+                    });
+                    //Bắt lỗi request
+                    req.on('error', function () {
+                        res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                        res.end("Error 404");
+                    });
+                }
+                break;
                 case '/CapNhatTinhTrang': {
                     var body = '';
                     req.on('data', function (chunk) {

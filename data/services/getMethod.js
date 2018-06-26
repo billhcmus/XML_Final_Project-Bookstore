@@ -2,7 +2,7 @@ const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
 const xml2js = require('xml2js');
 const pathSP = __dirname + '/../San_Pham';
-const pathAC = __dirname + '/../Tai_Khoan/Taikhoan.xml'
+const pathAC = __dirname + '/../Tai_Khoan/taikhoan.xml'
 
 //Lấy danh sách truyện
 let getListBooks = () => {
