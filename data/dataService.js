@@ -7,6 +7,7 @@ let saveMethod = require('./services/saveMethod');
 
 let cache_ListBooks = "";
 let cache_Account = "";
+let cache_DanhSachBan = "";
 
 function createSession() {
     return '_' + Math.random().toString(36);
@@ -60,6 +61,14 @@ app.createServer((req, res) => {
                     res.writeHeader(200, { 'Content-Type': 'text/xml' })
                     res.end(cache_ListBooks);
                     break;
+                case '/LayDanhSachBan': {
+                    if (!cache_DanhSachBan) {
+                        cache_DanhSachBan = getMethod.getDanhSachBan();
+                    }
+                    res.writeHeader(200, { 'Content-Type': 'text/xml' })
+                    res.end(cache_DanhSachBan);
+                }
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' });
                     res.end("Request was not support!!!");

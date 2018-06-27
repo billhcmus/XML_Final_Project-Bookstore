@@ -1146,3 +1146,28 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .menu-header {
     padding-top: 2.5%;
 }
+
+@media (min-width:768px){
+    .container-1{width:15%;float:left;}
+    .container-2{width:100%;float: left;}
+    }
+    
+    @media (max-width:768px){
+    .container-1{width:100%;}
+    .container-2{width:100%;}
+    }
+    .container-1:after,
+    .container-2:before,
+    {
+      display: table;
+      content: " ";
+    }
+    .container-1:after,
+    .container-2:after,
+    {clear: both;}
+    
+    .container-1{display: none;}
+
+    .saleInfo {
+        margin: 2%;
+    }
