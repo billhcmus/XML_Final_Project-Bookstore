@@ -491,3 +491,8 @@ tbody td:nth-of-type(6n) {
     padding-left: 2% !important;
     border: none !important;
 }
+
+.container-2 {
+    padding-left: 2%;
+    padding-right: 2%;
+}

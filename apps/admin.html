@@ -47,22 +47,22 @@
                     <i class="fa fa-key"></i> Đã Đăng Nhập</p>
                 <p class="name tooltip-sidebar-logout" id="name_user">
                 </p>
-                <a href="./index.html" id='btn_logout'>
+                <a href="/index.html" id='btn_logout'>
                     <i class="fa fa-sign-out"></i>
                 </a>
             </li>
 
             <li class="dashboard">
-                <a class="active" href="#">
-                    <i class="fa fa-dashboard"></i> Dashboard</a>
+                <a class="active" href="/admin.html">
+                    <i class="fa fa-dashboard" id='_dashboard'></i> Dashboard</a>
             </li>
 
             <li class="panel">
-                <a href="javascript:0;" data-toggle="collapse" data-target="#charts">
+                <a id="_charts">
                     <i class="fa fa-bar-chart-o"></i> Thống kê
-                    <i class="fa fa-caret-down pull-right"></i>
                 </a>
 
+                <!--
                 <ul class="collapse nav" id="charts">
                     <li>
                         <a href="#">
@@ -73,6 +73,7 @@
                             <i class="fa fa-angle-double-right"></i>Chưa hỗ trợ</a>
                     </li>
                 </ul>
+            -->
             </li>
 
 
@@ -81,7 +82,7 @@
 
 
     <div class="container-2">
-        <div id="page-wrapper">
+        <div id="dashboard_page">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-title">
@@ -213,10 +214,10 @@
                         <form action="" method="POST" role="form">
                             <div class="form-group">
                                 <div class="col-sm-8">
-                                        <label class="control-label col-md-2" for="name">Tên: </label>
-                                        <div class="col-md-10" style="margin-left: -0.5%">
-                                            <input type="text" class="form-control" id="name" placeholder="Nhập vào tên">
-                                        </div>
+                                    <label class="control-label col-md-2" for="name">Tên: </label>
+                                    <div class="col-md-10" style="margin-left: -0.5%">
+                                        <input type="text" class="form-control" id="name" placeholder="Nhập vào tên">
+                                    </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="control-label col-md-4" for="phone">Thể loại: </label>
@@ -228,26 +229,26 @@
                                         <option value="KHOCHOC">Khoa Học Vũ Trụ</option>
                                     </select>
                                 </div>
-                               
+
                             </div>
                             <div class="form-group" style="padding-top: 5%;">
-                                    <div class="col-sm-4">
-                                            <label class="control-label col-md-4" for="address">Đơn giá bán: </label>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" id="exportprice" placeholder="Nhập đơn giá bán">
-                                            </div>
-                                        </div>
-                                    <div class="col-sm-4">
-                                            <label class="control-label col-md-5" for="name">Số lượng tồn: </label>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control" id="inventory" placeholder="Nhập số lượng tồn">
-                                            </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label col-md-4" for="address">Đơn giá bán: </label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="exportprice" placeholder="Nhập đơn giá bán">
                                     </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label col-md-5" for="name">Số lượng tồn: </label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="inventory" placeholder="Nhập số lượng tồn">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group" style="padding-top: 5%; padding-left: 13%">
                                 <button type="button" id='addBook' class="btn btn-primary">Thêm sản phẩm</button>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -397,26 +398,54 @@
             </div>
 
             <div id="modalOfAddProduct" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Thêm sản phẩm</h4>
-                            </div>
-                            <div class="modal-body">
-                                    <form action="" method="POST" role="form" style="margin-left: 1%;">
-                                        <label for="">Bạn chắc chắn chứ?</label>
-                                        <br/>
-                                        <button type="submit" class="btn btn-primary" id="submit_addProduct">Yes</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    </form>
-                                </div>
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thêm sản phẩm</h4>
                         </div>
-    
+                        <div class="modal-body">
+                            <form action="" method="POST" role="form" style="margin-left: 1%;">
+                                <label for="">Bạn chắc chắn chứ?</label>
+                                <br/>
+                                <button type="submit" class="btn btn-primary" id="submit_addProduct">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="charts_page" style="display: none">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">
+                        <h2>Statistic
+                            <small>Thống kê</small>
+                        </h2>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Statistic</li>
+                            <li class="pull-right">
+                                <div id="reportrange" class="btn btn-green btn-square date-picker">
+                                    <i class="fa fa-calendar"></i>
+                                    <span class="date-range"></span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                            </li>
+                        </ol>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                </div>
+            </div>
         </div>
+    </div>
 </body>
 <!-- Bootstrap JS form CDN -->
 <script src="./js/jquery.min.js"></script>
@@ -425,8 +454,11 @@
 <script src="./js/account.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/bootstrap-toggle.min.js"></script>
+<script type="text/javascript" src="./js/canvasjs.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#tableChangePrice').DataTable();

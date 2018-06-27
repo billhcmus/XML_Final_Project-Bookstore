@@ -276,3 +276,52 @@ function formatNumber(number) {
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
 }
+
+//Thống kê
+let statisticByCategory =  function(listBooks) {
+    let length = listBooks.length;
+    let arr = [];
+
+    for ( i = 0; i < length; i++) {
+        category = listBooks[i].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
+        arr[category] = 0;
+    }
+    for ( i = 0; i < length; i++) {
+        category = listBooks[i].getElementsByTagName('Nhom_Sach')[0].getAttribute('Ma_so');
+        arr[category]++;
+    }
+    obj = [{ x: 1, y: arr['DIEN'], label: 'Điện tử'},
+            {x: 2, y: arr['KHOAHOC'], label: 'Khoa học'},
+            {x: 3, y: arr['KINHTE'], label: 'Kinh tế'},
+            {x: 4, y: arr['TINHOC'], label: 'Tin học'},
+            {x: 5, y: arr['VANHOC'], label: 'Văn học'}];
+    return obj;
+}
+
+$('#_charts').click(() => {
+    $('#dashboard_page').hide();
+    $('#charts_page').show();
+
+    $.get('http://localhost:1001/LayDoanhThu', function(data) {
+        alert(data);
+    })
+})
+
+window.onload = function () {
+
+    var chart = new CanvasJS.Chart("chartContainer",
+        {
+            animationEnabled: true,
+            animationDuration: 4000,   //change to 1000, 500 etc
+            title: {
+                text: "Statictis By Category"
+            },
+            data: [
+                {
+                    type: "column",
+                    dataPoints: statisticByCategory(data)
+                }
+            ]
+        });
+    chart.render();
+}

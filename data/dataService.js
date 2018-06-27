@@ -7,6 +7,7 @@ let saveMethod = require('./services/saveMethod');
 
 let cache_ListBooks = "";
 let cache_Account = "";
+let cache_Yield = "";
 
 function createSession() {
     return '_' + Math.random().toString(36);
@@ -53,13 +54,22 @@ app.createServer((req, res) => {
     switch (req.method) {
         case 'GET':
             switch (req.url) {
-                case '/LaySach':
+                case '/LaySach': {
                     if (!cache_ListBooks) {
                         cache_ListBooks = getMethod.getListBooks();
                     }
                     res.writeHeader(200, { 'Content-Type': 'text/xml' })
                     res.end(cache_ListBooks);
-                    break;
+                }
+                break;
+                case 'LayDoanhThu': {
+                    if (!cache_Yield) {
+                        cache_Yield = getMethod.getYield();
+                    }
+                    res.writeHeader(200, { 'Content-Type': 'text/xml' })
+                    res.end(cache_Yield);
+                }
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' });
                     res.end("Request was not support!!!");

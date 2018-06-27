@@ -3,6 +3,7 @@ const DOMParser = require('xmldom').DOMParser;
 const xml2js = require('xml2js');
 const pathSP = __dirname + '/../San_Pham';
 const pathAC = __dirname + '/../Tai_Khoan/taikhoan.xml'
+const pathPBH = __dirname + '/../Phieu_Ban_hang'
 
 //Lấy danh sách truyện
 let getListBooks = () => {
@@ -18,6 +19,22 @@ let getListBooks = () => {
     })
     var builder = new xml2js.Builder();
     var xml = builder.buildObject(listBooks);
+    return xml;
+}
+
+let getYield = () =>  {
+    listProducts = [];
+    fs.readdirSync(pathPBH).forEach(file => {
+        var filepath = pathPBH + "/" + file;
+        var parser = new xml2js.Parser();
+        var data = fs.readFileSync(filepath, "utf-8");
+
+        parser.parseString(data, function (err, result) {
+            listProducts.push(result);
+        })
+    })
+    var builder = new xml2js.Builder();
+    var xml = builder.buildObject(listProducts);
     return xml;
 }
 
