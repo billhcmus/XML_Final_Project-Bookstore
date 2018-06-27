@@ -91,11 +91,18 @@ $(document).ready(function () {
         let customerName = $('#name').val();
         let phone = $('#phone').val();
         let address = $('#address').val();
+        let employeeName = sessionStorage.getItem('name');
+    
+        var d = new Date();
+
+        var time = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
 
         obj = {
             customerName,
             phone,
-            address
+            address,
+            employeeName,
+            time
         }
         var arr = [];
         $(function () {
