@@ -187,6 +187,7 @@ body{background-color: #ecf0f1;
 .side-nav li {
     border-top: 1px solid #54677a;
     border-bottom: 1px solid #142638;
+    background-color: #34495E;
 }
 
 .side-nav>li>a:active {

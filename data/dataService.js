@@ -136,6 +136,28 @@ app.createServer((req, res) => {
                     })
                 }
                     break;
+                    case '/BoSungMatHang': {
+                        var body = '';
+                        req.on('data', function (chunk) {
+                            body += chunk;
+                        })
+                        req.on('end', function () {
+                            var data = JSON.parse(body);
+                            var check = saveMethod.addProduct(data);
+                            if (check) {
+                                res.writeHead(200, { 'Content-Type': 'text/plain' });
+                                res.end('Thêm sách thành công.');
+                                cache_ListBooks = "";
+                                console.log(' -->Done');
+                            }
+                            else {
+                                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                                res.end('Thêm sách thất bại');
+                                console.log(' -->Fail');
+                            }
+                        })
+                    }
+                    break;
                 case '/Login': {
                     var body = '';
                     req.on('data', function(chunk) {

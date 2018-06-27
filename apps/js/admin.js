@@ -222,6 +222,37 @@ $('#submit_status').click(function() {
     }
 });
 
+$('#addBook').click(function() {
+    let name = $('#name').val();
+    let category = $('#productType').val();
+    let exportPrice = $('#exportprice').val();
+    let inventory  = $('#inventory').val();
+    let nameCategory = $("#productType option:selected").text();
+    obj = {
+        name, category, exportPrice, inventory, nameCategory, 
+        length: data.length,
+        session: sessionStorage.getItem('session')
+    }
+    $('#modalOfAddProduct').modal('show');
+});
+
+$('#submit_addProduct').click(function() {
+    try {
+        $.post('http://localhost:1001/BoSungMatHang',
+            JSON.stringify(obj),
+            (data) =>  {
+                location.reload(true); //load lại trang
+            },
+            'text'
+        );
+        return true;
+    }
+    catch (err) {
+        console.log(err);
+        return false;
+    }
+})
+
 ///////////////////////////////////////////////////Phân trang
 
 function paginationView(data, value) {

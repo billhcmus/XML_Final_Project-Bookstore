@@ -200,7 +200,52 @@ app.createServer((req, res) => {
                         res.end("Error 404");
                     })
                 }
-                    break;
+                break;
+                case '/BoSungMatHang': {
+                    var body = '';
+                    req.on('data', function (chunk) {
+                        body += chunk;
+                    });
+
+                    req.on('end', function () {
+                        let data = JSON.parse(body);
+                        let session = data.session;
+                        if (checkSession(session) != -1) {
+                            request.post({
+                                headers: {
+                                    'Content-Type': 'text/plain',
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                url: 'http://localhost:1000/BoSungMatHang',
+                                body
+                            }, function (error, response, body) {
+                                if (error) {
+                                    console.log('ERROR: Không thể thêm');
+                                    res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                                    res.end("Error 404");
+                                }
+                                else {
+                                    res.writeHeader(200, { 'Content-Type': 'text/plain' });
+                                    res.end(body);
+                                    cache = "";
+                                    console.log('-->Done');
+                                }
+                            })
+                        }
+                        else {
+                            res.writeHead(404, { 'Content-Type': 'text/plain;charset=utf-8' });
+                            res.end('Vui lòng đăng nhập lại');
+                        }
+
+                    });
+
+                    //Bắt lỗi request
+                    req.on('error', function () {
+                        res.writeHeader(404, { 'Content-Type': 'text/plain' });
+                        res.end("Error 404");
+                    })
+                }
+                break;
                 case '/Login': {
                     var body = '';
                     req.on('data', function (chunk) {
