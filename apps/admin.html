@@ -59,7 +59,7 @@
 
             <li class="panel">
                 <a href="javascript:0;" data-toggle="collapse" data-target="#charts">
-                    <i class="fa fa-bar-chart-o"></i> Xem
+                    <i class="fa fa-bar-chart-o"></i> Thống kê
                     <i class="fa fa-caret-down pull-right"></i>
                 </a>
 
@@ -75,59 +75,7 @@
                 </ul>
             </li>
 
-            <li class="panel">
-                <a href="javascript:;" data-toggle="collapse" data-target="#calendar">
-                    <i class="fa fa-calendar"></i> Thay Đổi
-                    <i class="fa fa-caret-down pull-right"></i>
-                </a>
 
-                <ul class="collapse nav" id="calendar">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="panel">
-                <a href="javascript:;" data-toggle="collapse" data-target="#clipboard">
-                    <i class="fa fa-clipboard"></i> Bổ Sung
-                    <i class="fa fa-caret-down pull-right"></i>
-                </a>
-
-                <ul class="collapse nav" id="clipboard">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="panel">
-                <a href="javascript:;" data-toggle="collapse" data-target="#edit">
-                    <i class="fa fa-edit"></i> Tạm Ngưng
-                    <i class="fa fa-caret-down pull-right"></i>
-                </a>
-
-                <ul class="collapse nav" id="edit">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-angle-double-right"></i> Chưa hỗ trợ</a>
-                    </li>
-                </ul>
-            </li>
         </ul>
     </div>
 
@@ -199,26 +147,6 @@
 
                 <div class="col-lg-3 col-sm-6">
                     <div class="circle-tile">
-                        <a href="#insertBook" data-toggle="tab">
-                            <div class="circle-tile-heading orange">
-                                <i class="fa fa-bell fa-fw fa-3x"></i>
-                            </div>
-                        </a>
-                        <div class="circle-tile-content orange">
-                            <div class="circle-tile-description text-faded">
-                                Bổ Sung Mặt Hàng
-                                <div class="circle-tile-number text-faded">
-
-                                </div>
-                            </div>
-                            <a href="#insertBook" class="circle-tile-footer" data-toggle="tab">Xem thêm
-                                <i class="fa fa-chevron-circle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="circle-tile">
                         <a href="#suspendBook" data-toggle="tab">
                             <div class="circle-tile-heading blue">
                                 <i class="fa fa-tasks fa-fw fa-3x"></i>
@@ -232,6 +160,27 @@
                                 </div>
                             </div>
                             <a href="#suspendBook" class="circle-tile-footer" data-toggle="tab">Xem thêm
+                                <i class="fa fa-chevron-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#insertBook" data-toggle="tab">
+                            <div class="circle-tile-heading orange">
+                                <i class="fa fa-bell fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content orange">
+                            <div class="circle-tile-description text-faded">
+                                Bổ Sung Mặt Hàng
+                                <div class="circle-tile-number text-faded">
+
+                                </div>
+                            </div>
+                            <a href="#insertBook" class="circle-tile-footer" data-toggle="tab">Xem thêm
                                 <i class="fa fa-chevron-circle-right"></i>
                             </a>
                         </div>
@@ -260,7 +209,47 @@
                     </div>
                 </div>
                 <div id="insertBook" class="tab-pane fade">
-                    <h2>Tính năng chưa hỗ trợ</h2>
+                    <div class="container">
+                        <form action="" method="POST" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                        <label class="control-label col-md-2" for="name">Tên: </label>
+                                        <div class="col-md-10" style="margin-left: -0.5%">
+                                            <input type="text" class="form-control" id="name" placeholder="Nhập vào tên">
+                                        </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label col-md-4" for="phone">Thể loại: </label>
+                                    <select id="productType" name="ProductType" class="col-md-8 form-control product-type" style="width: 60%">
+                                        <option value="TINHOC">Tin học</option>
+                                        <option value="DIEN">Điện - Điện tử</option>
+                                        <option value="KINHTE">Kinh Tế</option>
+                                        <option value="VANHOC">Văn học</option>
+                                        <option value="KHOCHOC">Khoa Học Vũ Trụ</option>
+                                    </select>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group" style="padding-top: 5%;">
+                                    <div class="col-sm-4">
+                                            <label class="control-label col-md-4" for="address">Đơn giá bán: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="exportprice" placeholder="Nhập đơn giá bán">
+                                            </div>
+                                        </div>
+                                    <div class="col-sm-4">
+                                            <label class="control-label col-md-5" for="name">Số lượng tồn: </label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" id="inventory" placeholder="Nhập số lượng tồn">
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class="form-group" style="padding-top: 5%; padding-left: 13%">
+                                <button type="button" id='addBook' class="btn btn-primary">Thêm sản phẩm</button>
+                            </div>
+                            
+                        </form>
+                    </div>
                 </div>
                 <div id="suspendBook" class="tab-pane fade">
                     <div class="container">
@@ -406,6 +395,27 @@
 
                 </div>
             </div>
+
+            <div id="modalOfAddProduct" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thêm sản phẩm</h4>
+                            </div>
+                            <div class="modal-body">
+                                    <form action="" method="POST" role="form" style="margin-left: 1%;">
+                                        <label for="">Bạn chắc chắn chứ?</label>
+                                        <br/>
+                                        <button type="submit" class="btn btn-primary" id="submit_addProduct">Yes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                        </div>
+    
+                    </div>
+                </div>
         </div>
 </body>
 <!-- Bootstrap JS form CDN -->

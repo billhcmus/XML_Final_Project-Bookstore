@@ -71,8 +71,31 @@ let changeStatus = (data) => {
     }
 }
 
+let addProduct = (data) => {
+    let code = data.length;
+
+    let filePath = pathSP + '/SACH_' + code + '.xml';
+
+    var root = builder.create('Sach', {version: '1.0', encoding: 'UTF-8', standalone: true});
+    root.att('Ten', data.name);
+    root.att('Ma_so', `SACH_${code}`);
+    root.att('Don_gia_Ban', data.exportPrice);
+    root.att('So_luong_ton', data.inventory);
+    root.att('Tam_ngung', false)
+    
+    var sp = root.ele('Nhom_Sach');
+    sp.att('Ten', data.nameCategory);
+    sp.att('Ma_so', data.category);
+    sp.end({pretty: true});
+
+    root.end({pretty: true});
+    var dataWrite = root;
+    fs.writeFileSync(filePath, root, 'utf-8');
+}
+
 module.exports = {
     changePrice: changePrice,
     changeStatus: changeStatus,
-    addSaleList: addSaleList
+    addSaleList: addSaleList,
+    addProduct: addProduct
 }
