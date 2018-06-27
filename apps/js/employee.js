@@ -7,6 +7,58 @@ function getData() {
     return listBooks;
 }
 
+function getDanhSachBan() {
+    let xhttp = new XMLHttpRequest();
+    let query = 'http://localhost:1001/LayDanhSachBan';
+    xhttp.open('GET', query, false);
+    xhttp.send();
+    var danhSachBan = xhttp.responseXML.getElementsByTagName('PhieuBanHang');
+    return danhSachBan;
+}
+
+function setDanhSachBan(danhSachBan) {
+    if ($('#DanhSachBan').length == 0) {
+        return;
+    }
+
+    var html = '';
+    for (i = 0; i < danhSachBan.length; i++) {
+        var ThongTinPhieu = danhSachBan[i].getElementsByTagName('ThongTinPhieu');
+        for (j = 0; j < ThongTinPhieu.length; j++) {
+            var TenKhachHang = ThongTinPhieu[j].getAttribute('TenKhachHang');
+            var SDT = ThongTinPhieu[j].getAttribute('SDT');
+            var DiaChi = ThongTinPhieu[j].getAttribute('DiaChi');
+            var TenNhanVien = ThongTinPhieu[j].getAttribute('TenNhanVien');
+            var ThoiGian = ThongTinPhieu[j].getAttribute('ThoiGian');
+
+            var DanhSachSanPham = ThongTinPhieu[j].getElementsByTagName('SanPham');
+            for (k = 0; k < DanhSachSanPham.length; k++) {
+                var MaSach = DanhSachSanPham[k].getAttribute('MaSach');
+                var TenSach = DanhSachSanPham[k].getAttribute('TenSach');
+                var SoLuong = DanhSachSanPham[k].getAttribute('SoLuong');
+                var DonGia = DanhSachSanPham[k].getAttribute('DonGia');
+                var TongTien = DanhSachSanPham[k].getAttribute('TongTien');
+                var ht = `
+                <tr>
+                <td>${TenKhachHang}</td>
+                <td>${SDT}</td>
+                <td>${DiaChi}</td>
+                <td>${TenNhanVien}</td>
+                <td>${ThoiGian}</td>
+                <td>${MaSach}</td>
+                <td>${TenSach}</td>
+                <td>${SoLuong}</td>
+                <td>${DonGia}</td>
+                <td>${TongTien}</td>
+                </tr>
+                `
+                html += ht;
+            }
+        }
+    }
+    $('#DanhSachBan').html(html);
+}
+
 function setListBooks(listBooks) {
     if ($('#listBooks').length == 0) {
         return;
@@ -55,9 +107,9 @@ function formatNumber(number) {
 
 $(document).ready(function () {
     $('.btnSell').click(function () {
-        var name=$(this).attr("name");
-        var code=$(this).attr("code");
-        var exportPrice=$(this).attr("exportPrice");
+        var name = $(this).attr("name");
+        var code = $(this).attr("code");
+        var exportPrice = $(this).attr("exportPrice");
         $(".modal-body #nameOfProduct").val(name);
         $(".modal-body #codeOfProduct").val(code);
         $(".modal-body #priceOfProduct").val(exportPrice);
@@ -87,52 +139,65 @@ $(document).ready(function () {
 
     let obj = undefined;
 
-    $('.btnSubmitListSellProduct').click(function() {
+    $('.btnSubmitListSellProduct').click(function () {
         let customerName = $('#name').val();
         let phone = $('#phone').val();
         let address = $('#address').val();
-        let employeeName = sessionStorage.getItem('name');
-    
-        var d = new Date();
+        if (customerName.length === 0) {
+            alert("Trường không được để trống");
+        } else {
+            let employeeName = sessionStorage.getItem('name');
 
-        var time = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+            var d = new Date();
 
-        obj = {
-            customerName,
-            phone,
-            address,
-            employeeName,
-            time
-        }
-        var arr = [];
-        $(function () {
-            $('#listSellProduct tr').each(function () {
-               let code = $(this).find('td:nth-child(1)').text();
-               let productName = $(this).find('td:nth-child(2)').text();
-               let numOfProduct = $(this).find('td:nth-child(3)').text();
-               let price = $(this).find('td:nth-child(4)').text();
-               let TotalPrice = $(this).find('td:nth-child(5)').text();
-               arr.push({MaSach: code, TenSach: productName, SoLuong: numOfProduct, DonGia: price, TongTien: TotalPrice});
+            var time = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+
+            obj = {
+                customerName,
+                phone,
+                address,
+                employeeName,
+                time
+            }
+            var arr = [];
+            $(function () {
+                $('#listSellProduct tr').each(function () {
+                    let code = $(this).find('td:nth-child(1)').text();
+                    let productName = $(this).find('td:nth-child(2)').text();
+                    let numOfProduct = $(this).find('td:nth-child(3)').text();
+                    let price = $(this).find('td:nth-child(4)').text();
+                    let TotalPrice = $(this).find('td:nth-child(5)').text();
+                    arr.push({
+                        MaSach: code,
+                        TenSach: productName,
+                        SoLuong: numOfProduct,
+                        DonGia: price,
+                        TongTien: TotalPrice
+                    });
+                });
             });
-        });
-        let billInfo = JSON.stringify(arr);
-        obj = {
-            ...obj,
-            billInfo,
-            session: sessionStorage.getItem('session')
+            let billInfo = JSON.stringify(arr);
+            obj = {
+                ...obj,
+                billInfo,
+                session: sessionStorage.getItem('session')
+            }
+            if (obj) {
+                $.post('http://localhost:1001/ThemPhieuBan',
+                    JSON.stringify(obj),
+                    (data) => {
+                        location.reload(true);
+                    },
+                    'text'
+                )
+            }
         }
-        if (obj) {
-            $.post('http://localhost:1001/ThemPhieuBan',
-            JSON.stringify(obj),
-            (data) => {
-                location.reload(true);
-            },
-            'text'
-        )
-        }
+
     });
 });
 
 
 let data = getData();
+let danhSachban = getDanhSachBan();
 setListBooks(data);
+setDanhSachBan(danhSachban);

@@ -1,0 +1,6 @@
+<PhieuBanHang>
+  <ThongTinPhieu TenKhachHang="Phan Trong Thuyen" SDT="01643043749" DiaChi="TpHCM" TenNhanVien="Phan Trọng Thuyên" ThoiGian="28-6-2018 1:9">
+    <SanPham MaSach="SACH_02" TenSach="Tự Học Illustrator CS6 Trong Thiết Kế Đồ Họa" SoLuong="4" DonGia="71,891 VNĐ" TongTien="287,564 VNĐ"/>
+    <SanPham MaSach="SACH_03" TenSach="Công thức và hàm Excel" SoLuong="6" DonGia="61,491 VNĐ" TongTien="368,946 VNĐ"/>
+  </ThongTinPhieu>
+</PhieuBanHang>

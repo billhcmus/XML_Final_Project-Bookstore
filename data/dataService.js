@@ -7,7 +7,7 @@ let saveMethod = require('./services/saveMethod');
 
 let cache_ListBooks = "";
 let cache_Account = "";
-let cache_Yield = "";
+let cache_DanhSachBan = "";
 
 function createSession() {
     return '_' + Math.random().toString(36);
@@ -60,14 +60,14 @@ app.createServer((req, res) => {
                     }
                     res.writeHeader(200, { 'Content-Type': 'text/xml' })
                     res.end(cache_ListBooks);
+                    break;
                 }
-                break;
-                case 'LayDoanhThu': {
-                    if (!cache_Yield) {
-                        cache_Yield = getMethod.getYield();
+                case '/LayDanhSachBan': {
+                    if (!cache_DanhSachBan) {
+                        cache_DanhSachBan = getMethod.getDanhSachBan();
                     }
                     res.writeHeader(200, { 'Content-Type': 'text/xml' })
-                    res.end(cache_Yield);
+                    res.end(cache_DanhSachBan);
                 }
                 break;
                 default:

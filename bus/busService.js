@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer')
 
 const port = 1001;
 let cache = "";
+let cacheDanhSachBan = "";
 let listSessions = [];
 let cacheYield = "";
 
@@ -51,26 +52,28 @@ app.createServer((req, res) => {
                         }
                     });
                 }
-                break;
-                case 'LayDoanhThu': {
-                    request.get('http://localhost:1000/LayDoanhThu', function (error, respone, body) {
+                    break;
+
+                case '/LayDanhSachBan': {
+                    request.get('http://localhost:1000/LayDanhSachBan', function (error, respone, body) {
                         if (error) {
-                            console.log('ERROR: Không lấy được danh sách sách');
+                            console.log('ERROR: Không lấy được danh sách bán');
                             res.writeHeader(404, { 'Content-Type': 'text/plain' });
                             res.end("Error 404");
                         }
                         else {
-                            if (!cacheYield) {
-                                cacheYield = body;
+                            if (!cacheDanhSachBan) {
+                                cacheDanhSachBan = body;
                                 res.writeHeader(200, { 'Content-Type': 'text/xml' })
-                                res.end(cacheYield);
+                                res.end(cacheDanhSachBan);
                             }
                             else {
-                                res.end(cacheYield);
+                                res.end(cacheDanhSachBan);
                             }
                         }
                     });
                 }
+                break;
                 default:
                     res.writeHeader(404, { 'Content-Type': 'text/plain' });
                     res.end("Request was not support!!!");
