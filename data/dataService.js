@@ -115,6 +115,7 @@ app.createServer((req, res) => {
                             res.writeHead(200, { 'Content-Type': 'text/plain' });
                             res.end('Them phiếu bán thành công.');
                             cache_ListBooks = "";
+                            cache_DanhSachBan = "";
                             console.log(' -->Done');
                         }
                         else {

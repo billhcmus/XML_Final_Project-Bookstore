@@ -45,7 +45,7 @@ function setDanhSachBan(danhSachBan) {
                 <td>${DiaChi}</td>
                 <td>${TenNhanVien}</td>
                 <td>${ThoiGian}</td>
-                <td>${MaSach}</td>
+                <td></td>
                 <td>${TenSach}</td>
                 <td>${SoLuong}</td>
                 <td>${DonGia}</td>
@@ -146,7 +146,7 @@ $(document).ready(function () {
         if (customerName.length === 0) {
             alert("Trường không được để trống");
         } else {
-            let employeeName = sessionStorage.getItem('name');
+            let employeeName = localStorage.getItem('name');
 
             var d = new Date();
 
@@ -180,13 +180,13 @@ $(document).ready(function () {
             obj = {
                 ...obj,
                 billInfo,
-                session: sessionStorage.getItem('session')
+                session: localStorage.getItem('session')
             }
             if (obj) {
                 $.post('http://localhost:1001/ThemPhieuBan',
                     JSON.stringify(obj),
                     (data) => {
-                        location.reload(true);
+                        location.reload();
                     },
                     'text'
                 )

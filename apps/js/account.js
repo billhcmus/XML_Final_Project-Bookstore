@@ -1,5 +1,5 @@
-let session = sessionStorage.getItem('session');
-let name = sessionStorage.getItem('name');
+let session = localStorage.getItem('session');
+let name = localStorage.getItem('name');
 
 if (session) {
     $('#btn_login').hide();
@@ -7,6 +7,10 @@ if (session) {
     $('#btn_logout').show();
 
     $('#name_user').text(`Chào, ${name}`);
+    if (localStorage.getItem('name') == 'Huỳnh Trọng Thoại')
+        $('#name_user').attr('href', '/admin.html');
+    else
+        $('#name_user').attr('href', '/employee.html');
 }
 else {
     $('#btn_login').show();

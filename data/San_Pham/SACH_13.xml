@@ -1,5 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <Sach Ten="Kỹ Thuật Nhiệt (Dành Cho Sinh Viên Ngành Công Trình)" Ma_so="SACH_13" Don_gia_Ban="53474" Don_gia_Nhap="47609"
-        So_luong_ton="8" Doanh_thu="0" Tam_ngung="False">
-        <Nhom_Sach Ten="Điện - Điện tử" Ma_so="DIEN" />
+<?xml version="1.0" encoding="UTF-8"?>
+<Sach Ten="Kỹ Thuật Nhiệt (Dành Cho Sinh Viên Ngành Công Trình)" Ma_so="SACH_13" Don_gia_Ban="53474" Don_gia_Nhap="47609" So_luong_ton="6" Doanh_thu="0" Tam_ngung="False">
+        <Nhom_Sach Ten="Điện - Điện tử" Ma_so="DIEN"/>
 </Sach>

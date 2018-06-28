@@ -174,7 +174,7 @@ $("#submit_price").click(function () {
     obj = {
         ...obj,
         priceNew,
-        session: sessionStorage.getItem('session')
+        session: localStorage.getItem('session')
     }
     if (obj) {
         $.post('http://localhost:1001/CapNhatGiaBan',
@@ -203,7 +203,7 @@ $('input[type="checkbox"]').change(function() {
         code,
         name,
         status,
-        session: sessionStorage.getItem('session')
+        session: localStorage.getItem('session')
     }
 
     $('#modalOfStatus').modal('show');
@@ -242,7 +242,7 @@ $('#addBook').click(function() {
     obj = {
         name, category, exportPrice, inventory, nameCategory, 
         length: data.length,
-        session: sessionStorage.getItem('session')
+        session: localStorage.getItem('session')
     }
     $('#modalOfAddProduct').modal('show');
 });

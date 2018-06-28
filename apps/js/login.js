@@ -32,9 +32,9 @@ $('#form_submit').submit(function (event) {
                     )
 
                     let position = xmlObj.account.position;
-                    //Tạo sessionStorage
-                    sessionStorage.setItem('session', xmlObj.session);
-                    sessionStorage.setItem('name', xmlObj.account.name);
+                    //Tạo localStorage
+                    localStorage.setItem('session', xmlObj.session);
+                    localStorage.setItem('name', xmlObj.account.name);
 
                     //check
                     if (position === 'admin')
@@ -45,6 +45,7 @@ $('#form_submit').submit(function (event) {
                 }
                 else {
                     $('#error_login').html('Tài khoản mật khẩu không chính xác');
+                    location.reload();
                     return false;
                 }
             },
@@ -58,7 +59,7 @@ $('#form_submit').submit(function (event) {
 });
 
 $('#btn_logout').click(() => {
-    let session = sessionStorage.getItem('session');
+    let session = localStorage.getItem('session');
     try {
         $.post('http://localhost:1001/Logout',
             session,
@@ -71,8 +72,8 @@ $('#btn_logout').click(() => {
                     'text'
                 )
 
-                sessionStorage.removeItem('session');
-                sessionStorage.removeItem('name');
+                localStorage.removeItem('session');
+                localStorage.removeItem('name');
                 location.href = '/index.html';
             },
             'text'
