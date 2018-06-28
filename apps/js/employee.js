@@ -112,6 +112,7 @@ function searchBook(listBooks, keyWord) {
     if ($('#listBooks').length == 0) {
         return;
     }
+    $('#listBooks').html="";
     var html = `<div class='row'>`;
     for (i = 0; i < listBooks.length; i++) {
         var name = listBooks[i].getAttribute('Ten');
