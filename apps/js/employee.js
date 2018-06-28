@@ -256,6 +256,8 @@ $(document).ready(function () {
         $('#modalOfSell').modal();
     });
 
+    $('#table_Dsbh').DataTable();
+
 });
 
 setListBooks(data);
