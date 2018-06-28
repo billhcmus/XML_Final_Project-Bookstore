@@ -236,6 +236,15 @@ $(document).ready(function () {
     $('#btnSearch').click(function () {
         let keyWord = $('#inputSearch').val();
         searchBook(data, keyWord);
+        $('.btnSell').click(function () {
+            var name = $(this).attr("name");
+            var code = $(this).attr("code");
+            var exportPrice = $(this).attr("exportPrice");
+            $(".modal-body #nameOfProduct").val(name);
+            $(".modal-body #codeOfProduct").val(code);
+            $(".modal-body #priceOfProduct").val(exportPrice);
+            $('#modalOfSell').modal();
+        });
     });
 
     $('.btnSell').click(function () {
