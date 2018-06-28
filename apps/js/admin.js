@@ -7,6 +7,15 @@ function getData() {
     return listBooks;
 }
 
+function getDanhSachBan() {
+    let xhttp = new XMLHttpRequest();
+    let query = 'http://localhost:1001/LayDanhSachBan';
+    xhttp.open('GET', query, false);
+    xhttp.send();
+    var danhSachBan = xhttp.responseXML.getElementsByTagName('PhieuBanHang');
+    return danhSachBan;
+}
+
 function setListBooksForAdmin(listBooks, start, end) {
     if ($("#listBooksForAdmin").length === 0)
         return;
@@ -30,7 +39,7 @@ function setListBooksForAdmin(listBooks, start, end) {
                                     <div class="cart-left">
                                         <p class="title">${name}</p>
                                     </div>
-                                    <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
+                                    <div class="mount item_price price">${formatNumber(exportPrice)} VND</div>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +68,7 @@ function changePrice(listBooks) {
                     </td>
                     <td>${code}</td>
                     <td>${name}</td>
-                    <td>${formatNumber(exportPrice)}đ</td>
+                    <td>${formatNumber(exportPrice)}VND</td>
                     <td><button type="button" class="btn btn-success updatePrice">Sửa</button></td>
                 </tr>`     
     }
@@ -110,6 +119,8 @@ function suppendBook(listBooks) {
 
 //////////////////////////////////////////////////////Xử lý view
 var data = getData();
+let danhSachBan = getDanhSachBan();
+
 let params = location.search;
 let key = parseQuery(params).key;
 let value = parseQuery(params).value;
@@ -298,23 +309,69 @@ let statisticByCategory =  function(listBooks) {
     return obj;
 }
 
-$('#_charts').click(() => {
+let frequentlyBuyingBook = (listBooks) => {
+    let length = listBooks.length;
+    let arr = [];
+
+    for (i = 0;i < length;i++) {
+        product = listBooks[i].getElementsByTagName('SanPham');
+        length_product = product.length;
+        for (j = 0;j < length_product;j++) {
+            arr.push({
+                money: product[j].getAttribute('TongTien'),
+                name: product[j].getAttribute('TenSach') 
+            });
+        }   
+    }
+
+    let result = {};
+    let length_arr = arr.length;
+    for (i = 0;i < length_arr; i++) {
+       if (!result[arr[i].name])
+            result[arr[i].name] = 0;
+        result[arr[i].name] += formatPrice(arr[i].money);
+    }
+    
+    let obj = [];
+    for (key in result) {
+        obj.push({
+            y: result[key],
+            indexLabel: key
+        })
+    }
+
+    //sort
+    obj.sort((a,b) => {
+        return a.y - b.y;
+    })
+    return obj.slice(0,5);
+}
+
+function tinhDoanhThu(danhSachBan) {
+    let doanhThu = 0;
+    let length = danhSachBan.length;
+    for (i = 0;i < length;i++) {
+        sp = danhSachBan[i].getElementsByTagName('SanPham');
+        length_sp = sp.length;
+        for (j = 0;j < length_sp;j++) {
+            doanhThu += formatPrice(sp[j].getAttribute('TongTien'));
+        }
+    }
+    return doanhThu;
+}
+
+$('#_charts').click(function(){
     $('#dashboard_page').hide();
     $('#charts_page').show();
 
-    $.get('http://localhost:1001/LayDoanhThu', function(data) {
-        alert(data);
-    })
-})
-
-window.onload = function () {
-
-    var chart = new CanvasJS.Chart("chartContainer",
+    
+    var chart_1 = new CanvasJS.Chart("chartContainer_1",
         {
             animationEnabled: true,
             animationDuration: 4000,   //change to 1000, 500 etc
             title: {
-                text: "Statictis By Category"
+                text: "Thống kê theo thể loại",
+                fontFamily: 'Arial'
             },
             data: [
                 {
@@ -323,5 +380,39 @@ window.onload = function () {
                 }
             ]
         });
-    chart.render();
+        chart_1.render();
+    
+
+        var chart_2 = new CanvasJS.Chart("chartContainer_2",
+        {
+            animationEnabled: true, 
+		    animationDuration: 2000,
+            title:{
+                text: "Thống kê theo top 5 sách",
+                fontFamily: 'Arial'
+            },
+            legend: {
+                maxWidth: 350,
+                itemWidth: 120
+            },
+            data: [
+            {
+                type: "pie",
+                showInLegend: true,
+                toolTipContent: "{y} - #percent %",
+                yValueFormatString: "###,##0,### VND",
+                legendText: "{indexLabel}",
+                dataPoints: frequentlyBuyingBook(danhSachBan)
+            }
+            ]
+        });
+        chart_2.render();
+
+    $('#turnover').html(`Doanh thu:  ${formatNumber(tinhDoanhThu(danhSachBan))} VND`);
+})
+
+function formatPrice(price) {
+    let origin = price.slice(0, price.indexOf(','));
+    let decimal = price.slice(price.indexOf(',') + 1, price.indexOf(' '));
+    return origin*1000 + +decimal; 
 }

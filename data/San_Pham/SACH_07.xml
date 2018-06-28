@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <Sach Ten="Tự Học Adobe InDesign CS5" Ma_so="SACH_07" Don_gia_Ban="63264" Don_gia_Nhap="56459" So_luong_ton="5" Doanh_thu="0"
-        Tam_ngung="False">
-        <Nhom_Sach Ten="Tin học" Ma_so="TINHOC" />
+<Sach Ten="Tự Học Adobe InDesign CS5" Ma_so="SACH_07" Don_gia_Ban="63264" Don_gia_Nhap="56459" So_luong_ton="4" Doanh_thu="0" Tam_ngung="False">
+        <Nhom_Sach Ten="Tin học" Ma_so="TINHOC"/>
     </Sach>

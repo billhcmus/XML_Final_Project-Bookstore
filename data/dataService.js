@@ -81,6 +81,7 @@ app.createServer((req, res) => {
         case 'POST':
             switch (req.url) {
                 case '/CapNhatGiaBan': {
+                    console.log('Hihi');
                     var body = '';
                     req.on('data', function (chunk) {
                         body += chunk;

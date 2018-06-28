@@ -89,7 +89,7 @@ function setListBooks(listBooks) {
                     </div>
                     <div class="product-option-shop">
                         <button type="button" name="${name}" code="${code}" exportPrice="${exportPrice}" class="btn btn-success btn-lock btnSell">Bán</button>
-                        <a class="prime">${formatNumber(exportPrice)} VNĐ</a>
+                        <a class="prime">${formatNumber(exportPrice)} VND</a>
                     </div>                   
                 </div>
             </div>
@@ -128,8 +128,8 @@ $(document).ready(function () {
             <td>${code}</td>
             <td>${productName}</td>
             <td>${numOfProduct}</td>
-            <td>${price} VNĐ</td>
-            <td>${TotalPrice} VNĐ</td>
+            <td>${price} VND</td>
+            <td>${TotalPrice} VND</td>
         </tr>
         `;
         $('#listSellProduct').append(html);

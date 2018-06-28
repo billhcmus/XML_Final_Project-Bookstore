@@ -7,7 +7,6 @@ const port = 1001;
 let cache = "";
 let cacheDanhSachBan = "";
 let listSessions = [];
-let cacheYield = "";
 
 
 
@@ -161,7 +160,7 @@ app.createServer((req, res) => {
                                 else {
                                     res.writeHeader(200, { 'Content-Type': 'text/plain' });
                                     res.end(body);
-                                    cache = "";
+                                    cacheDanhSachBan = "";
                                     console.log('-->Done');
                                 }
                             });

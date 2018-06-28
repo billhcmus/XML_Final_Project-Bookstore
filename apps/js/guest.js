@@ -20,11 +20,10 @@ function setListBooksForNewProduct(listBooks) {
     let length = listBooks.length;
     let html = '';
     let code, name, exportPrice, status;
-    for (i = 0; i < 9; i++) {
-        random = Math.floor((Math.random() * (length - 1)) + 0);
-        code = listBooks[random].getAttribute('Ma_so');
-        name = listBooks[random].getAttribute('Ten');
-        exportPrice = listBooks[random].getAttribute('Don_gia_Ban');
+    for (i = 9; i < 18; i++) {
+        code = listBooks[i].getAttribute('Ma_so');
+        name = listBooks[i].getAttribute('Ten');
+        exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
 
         if (i % 3 === 0)
             html += `<div class="content_grid">`;
@@ -40,7 +39,7 @@ function setListBooksForNewProduct(listBooks) {
                                         <p class="title">${name}</p>
                                     </div>
                                     <div class="amount item_price special-price">
-                                        <span id="product-price-384150411" class="price">${formatNumber(exportPrice)} đ</span>
+                                        <span id="product-price-384150411" class="price">${formatNumber(exportPrice)} VND</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -75,7 +74,7 @@ function setListBooksForBuy(listBooks) {
                                 <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
                                 <div class="grid-flex">
                                     <div href="#">${name}</div>
-                                    <p>${formatNumber(exportPrice)} đ</p>
+                                    <p>${formatNumber(exportPrice)} VND</p>
                                 </div>
                             </a>
                         </li>`
@@ -110,7 +109,7 @@ function setListBooksForShop(listBooks, numberBooksOfAPage) {
                             <div class="cart-left">
                                 <p class="title">${name}</p>
                             </div>
-                            <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
+                            <div class="mount item_price price">${formatNumber(exportPrice)} VND</div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -147,7 +146,7 @@ function setListBooksbyCategory(listBooks, categoryQuery) {
                             <div class="cart-left">
                                 <p class="title">${name}</p>
                             </div>
-                            <div class="mount item_price price">${formatNumber(exportPrice)} đ</div>
+                            <div class="mount item_price price">${formatNumber(exportPrice)} VND</div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -217,7 +216,7 @@ function setDetailBook(listBooks, codeQuery) {
                     <div class="clearfix"></div>
                 </ul>
                 <div class="price_single">
-                    <span class="amount item_price actual">${formatNumber(exportPrice)} đ</span>
+                    <span class="amount item_price actual">${formatNumber(exportPrice)} VND</span>
                 </div>
 
                 <ul class="product-qty">
@@ -270,7 +269,7 @@ function setBookSameCategory(listBooks, codeQuery) {
                         <img src="images/${code}.jpg" class="img-responsive"  width="270px" height="324px"/>
                         <div class="grid-flex">
                             <p>${name}</p>
-                            <p>${formatNumber(exportPrice)} đ</p>
+                            <p>${formatNumber(exportPrice)} VND</p>
                         </div>
                     </a>`
                 }  

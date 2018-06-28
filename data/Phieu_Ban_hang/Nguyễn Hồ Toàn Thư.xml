@@ -1,0 +1,6 @@
+<PhieuBanHang>
+  <ThongTinPhieu TenKhachHang="Nguyễn Hồ Toàn Thư" SDT="0939944227" DiaChi="Quận 8, TPHCM" TenNhanVien="Phan Trọng Thuyên" ThoiGian="28-6-2018 3:23">
+    <SanPham MaSach="SACH_01" TenSach="Lập Trình Với C# Xây Dựng Ứng Dụng" SoLuong="2" DonGia="68,000 VNĐ" TongTien="136,000 VNĐ"/>
+    <SanPham MaSach="SACH_07" TenSach="Tự Học Adobe InDesign CS5" SoLuong="1" DonGia="63,264 VNĐ" TongTien="63,264 VNĐ"/>
+  </ThongTinPhieu>
+</PhieuBanHang>
