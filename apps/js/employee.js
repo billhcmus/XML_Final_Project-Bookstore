@@ -105,16 +105,53 @@ function formatNumber(number) {
     return parts.join(".");
 }
 
+function searchBook(listBooks, keyWord) {
+    if (keyWord.length === 0) {
+        return;
+    }
+    if ($('#listBooks').length == 0) {
+        return;
+    }
+    var html = `<div class='row'>`;
+    for (i = 0; i < listBooks.length; i++) {
+        var name = listBooks[i].getAttribute('Ten');
+        var code = listBooks[i].getAttribute('Ma_so');
+        if (name.includes(keyWord) || code.includes(keyWord)) {
+            var exportPrice = listBooks[i].getAttribute('Don_gia_Ban');
+
+            if (i % 4 === 0 && i >= 4) {
+                html += `</div><div class='row'>`;
+            }
+
+            html += `<div class="col-md-3 col-sm-6">
+            <div class="single-shop-product">
+                <div class="inner_content_product">
+                    <div class="product_image">
+                        <img src="../images/${code}.jpg">
+                        <div class="product_image">
+                            <div class="cart-left">
+                                <p class="title">${name}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-option-shop">
+                        <button type="button" name="${name}" code="${code}" exportPrice="${exportPrice}" class="btn btn-success btn-lock btnSell">Bán</button>
+                        <a class="prime">${formatNumber(exportPrice)} VND</a>
+                    </div>                   
+                </div>
+            </div>
+        </div>`;
+        }
+    }
+    html += '</div>'
+    $('#listBooks').html(html);
+}
+
+let data = getData();
+let danhSachban = getDanhSachBan();
+
 $(document).ready(function () {
-    $('.btnSell').click(function () {
-        var name = $(this).attr("name");
-        var code = $(this).attr("code");
-        var exportPrice = $(this).attr("exportPrice");
-        $(".modal-body #nameOfProduct").val(name);
-        $(".modal-body #codeOfProduct").val(code);
-        $(".modal-body #priceOfProduct").val(exportPrice);
-        $('#modalOfSell').modal();
-    });
+    
 
     $('.btnSubmitSell').click(function () {
         let numOfProduct = parseInt($('#numOfProduct').val());
@@ -194,10 +231,23 @@ $(document).ready(function () {
         }
 
     });
+
+    $('#btnSearch').click(function () {
+        let keyWord = $('#inputSearch').val();
+        searchBook(data, keyWord);
+    });
+
+    $('.btnSell').click(function () {
+        var name = $(this).attr("name");
+        var code = $(this).attr("code");
+        var exportPrice = $(this).attr("exportPrice");
+        $(".modal-body #nameOfProduct").val(name);
+        $(".modal-body #codeOfProduct").val(code);
+        $(".modal-body #priceOfProduct").val(exportPrice);
+        $('#modalOfSell').modal();
+    });
+
 });
 
-
-let data = getData();
-let danhSachban = getDanhSachBan();
 setListBooks(data);
 setDanhSachBan(danhSachban);

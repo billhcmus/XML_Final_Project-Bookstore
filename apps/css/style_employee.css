@@ -1171,3 +1171,24 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     .saleInfo {
         margin: 2%;
     }
+
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 16px;
+    border: solid 1px #ccc;
+}
+
+.topnav button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 65px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
