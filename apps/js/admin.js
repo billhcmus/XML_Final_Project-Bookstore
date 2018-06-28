@@ -239,6 +239,14 @@ $('#addBook').click(function() {
     let exportPrice = $('#exportprice').val();
     let inventory  = $('#inventory').val();
     let nameCategory = $("#productType option:selected").text();
+    if (!name || !category || !exportPrice || !inventory) {
+        $('#error_form').show();
+        return;
+    }
+    else {
+        $('#error_form').hide();
+    }
+
     obj = {
         name, category, exportPrice, inventory, nameCategory, 
         length: data.length,
